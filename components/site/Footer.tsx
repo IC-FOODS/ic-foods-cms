@@ -13,7 +13,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-3">
               <Image
-                src="/logo.png"
+                src="/ic-foods-website/logo.png"
                 alt=""
                 width={32}
                 height={32}
