@@ -315,7 +315,7 @@ export function validateConferenceProgramItem(
     speaker_names: row.speaker_names,
     track: row.track || undefined,
     type: row.type || undefined,
-    tags: row.tags ? parseTags(row.tags) : undefined,
+    tags: row.tags || undefined,
   };
 }
 
@@ -367,14 +367,14 @@ export function validateConferenceSpeaker(
   };
 }
 
-export function validateAndDeduplicate<T>(
-  items: T[],
+export function validateAndDeduplicate<T extends object>(
+  items: Record<string, string>[],
   validator: (row: Record<string, string>) => T,
   type: string
 ): T[] {
   const validated = items.map((item, index) => {
     try {
-      return validator(item as Record<string, string>);
+      return validator(item);
     } catch (error) {
       throw new Error(
         `Validation error in ${type} row ${index + 1}: ${error instanceof Error ? error.message : String(error)}`
