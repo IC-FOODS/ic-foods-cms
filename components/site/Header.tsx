@@ -22,7 +22,7 @@ export function Header() {
             className="flex items-center gap-3 no-underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
           >
             <Image
-              src="/logo.png"
+              src="/ic-foods-website/logo.png" 
               alt=""
               width={70}
               height={70}
