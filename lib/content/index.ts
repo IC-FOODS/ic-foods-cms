@@ -37,7 +37,11 @@ let resourcesCache: Resource[] | null = null;
 export function getTeam(): TeamMember[] {
   if (teamCache === null) {
     const raw = readCSV<Record<string, string>>("team.csv");
-    teamCache = validateAndDeduplicate<TeamMember>(raw, validateTeamMember, "team");
+    teamCache = validateAndDeduplicate<TeamMember>(
+      raw,
+      validateTeamMember,
+      "team"
+    );
   }
   return teamCache;
 }
@@ -45,7 +49,11 @@ export function getTeam(): TeamMember[] {
 export function getProjects(): Project[] {
   if (projectsCache === null) {
     const raw = readCSV<Record<string, string>>("projects.csv");
-    projectsCache = validateAndDeduplicate<Project>(raw, validateProject, "projects");
+    projectsCache = validateAndDeduplicate<Project>(
+      raw,
+      validateProject,
+      "projects"
+    );
   }
   return projectsCache;
 }
@@ -85,7 +93,11 @@ export function getPress(): Press[] {
 export function getResources(): Resource[] {
   if (resourcesCache === null) {
     const raw = readCSV<Record<string, string>>("resources.csv");
-    resourcesCache = validateAndDeduplicate<Resource>(raw, validateResource, "resources");
+    resourcesCache = validateAndDeduplicate<Resource>(
+      raw,
+      validateResource,
+      "resources"
+    );
   }
   return resourcesCache;
 }

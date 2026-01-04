@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
+import { VideoThumbnail } from "@/components/ui/VideoThumbnail";
 import { getConferenceByYear, getConferenceVideos } from "@/lib/content";
 
 interface ConferenceVideosPageProps {
@@ -44,14 +45,10 @@ export default async function ConferenceVideosPage({
         {videos.map((video, index) => (
           <Card key={index} href={video.url}>
             <div className="aspect-video bg-surface-raised rounded-lg mb-4 overflow-hidden">
-              <img
+              <VideoThumbnail
                 src={getYouTubeThumbnail(video.url)}
                 alt={video.title}
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src =
-                    "/assets/video-placeholder.jpg";
-                }}
               />
             </div>
             <h3 className="text-lg font-semibold text-primary mb-2">

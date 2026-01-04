@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Section } from "@/components/ui/Section";
 
-export default function ContactPage() {
+function ContactContent() {
   const searchParams = useSearchParams();
   const [subject, setSubject] = useState("");
 
@@ -74,5 +74,24 @@ export default function ContactPage() {
         </div>
       </div>
     </Section>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense
+      fallback={
+        <Section title="Contact" eyebrow="Get in Touch">
+          <div className="max-w-2xl prose-content">
+            <p className="mb-8">
+              Get in touch with IC-FOODS. We welcome inquiries about
+              partnerships, collaborations, and opportunities to work together.
+            </p>
+          </div>
+        </Section>
+      }
+    >
+      <ContactContent />
+    </Suspense>
   );
 }
