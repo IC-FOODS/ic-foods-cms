@@ -36,8 +36,8 @@ jobs:
         run: npm run build
         env:
           # Base path for GitHub Pages deployment
-          # Repository name: ic-food-website
-          VITE_BASE_PATH: /ic-food-website/
+          # Repository name: ic-foods-website
+          VITE_BASE_PATH: /ic-foods-website/
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
