@@ -155,14 +155,20 @@ const AboutUs: React.FC = () => {
               <div className="text-center py-12 text-gray-500">Loading team members...</div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {team.map((member, idx) => (
+                {team.map((member, idx) => {
+                  // Handle local images (starting with /) vs external URLs
+                  const imageUrl = member.imgUrl.startsWith('http://') || member.imgUrl.startsWith('https://')
+                    ? member.imgUrl
+                    : `${import.meta.env.BASE_URL}${member.imgUrl.replace(/^\//, '')}`;
+                  
+                  return (
                 <div key={idx} className="bg-white border border-gray-100 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 group flex flex-col h-full">
                   {/* Profile Header (Image, Name, Role) */}
                   <div className="p-8 pb-4 flex flex-col items-center text-center">
                     <div className="relative mb-6">
                       <div className="w-48 h-48 rounded-full overflow-hidden bg-aggie-gray shadow-inner border-4 border-white relative">
                         <img 
-                          src={member.imgUrl} 
+                          src={imageUrl} 
                           alt={member.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
@@ -229,7 +235,8 @@ const AboutUs: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
