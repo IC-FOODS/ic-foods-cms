@@ -1,0 +1,11 @@
+title,description,category
+Product Naming and Attribute Guidelines,"Rules for the order and content of names (e.g., Category > Variety > Grade) to eliminate ambiguity in market listings.",guidelines
+Agricultural Practices and Certifications,"Standards for recording attributes like USDA Organic, minority-owned status, or regional labels to verify supply chain claims.",guidelines
+Unit of Measure Guidelines,"Protocols for documenting count, unit, weight, and case size to reduce variability in pack sizes across different vendors.",guidelines
+Transaction and Traceability Guidelines,"Standards for invoices and tracking, including Invoice IDs, price per unit, and farm origin data for rapid recall response.",guidelines
+Implementing the Guidelines,"Practical advice on how food hubs and producers can adopt these structures into their daily software and operational workflows.",guidelines
+Digital IDs,"Unique identifiers (like GS1 Global Location Numbers) that distinguish businesses and locations in the supply chain. These act as the ""social security numbers"" for the food industry.",technical
+Lot Codes,"Alpha/numeric codes assigned to small units of product (e.g., identifying a specific harvest date or field) to enable precision during food safety recalls and inventory management.",technical
+Produce - Other Resources,"Supplemental materials, external links (USDA, GS1, PTI), and additional context for regional food systems.",resources
+Data Template (XLS),"Downloadable spreadsheet designed for maintaining business records and generating standardized invoices.",resources
+Full Project Report (PDF),"Detailed research report on collaborative standards development between IC-FOODS, USDA, and Wolfe's Neck Center.",resources
