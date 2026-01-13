@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, ShieldCheck, Globe } from 'lucide-react';
 
 const OntologyBackground: React.FC = () => {
@@ -143,6 +144,7 @@ const OntologyBackground: React.FC = () => {
 };
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="animate-in fade-in duration-700">
       {/* Hero Section with Hidden Interactive Background */}
@@ -152,17 +154,22 @@ const Home: React.FC = () => {
         <OntologyBackground />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pointer-events-none">
-          <h1 className="text-4xl lg:text-6xl font-extrabold mb-6 tracking-tight pointer-events-auto">
+          <h1 className="text-4xl font-extrabold mb-6 tracking-tight pointer-events-auto">
             Connecting the Dots of the <span className="text-aggie-gold">Global Food System</span>
           </h1>
-          <p className="text-xl lg:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed pointer-events-auto">
+          <p className="text-xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed pointer-events-auto">
             The International Center for Food Ontology Operability Data and Semantics (IC-FOODS) creates the common language computers need to understand our food.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 pointer-events-auto">
-            <button className="bg-aggie-gold text-aggie-blue px-8 py-3 rounded-md font-bold text-lg hover:bg-white transition-all shadow-lg">
+            <button
+              onClick={() => navigate('/projects')}
+              className="bg-aggie-gold text-aggie-blue px-8 py-3 rounded-md font-bold text-lg hover:bg-white transition-all shadow-lg"
+            >
               Explore Projects
             </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-md font-bold text-lg hover:bg-white hover:text-aggie-blue transition-all">
+            <button 
+              onClick={() => navigate('/publications')}
+              className="border-2 border-white text-white px-8 py-3 rounded-md font-bold text-lg hover:bg-white hover:text-aggie-blue transition-all">
               Learn How It Works
             </button>
           </div>
