@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
             <Link to="/" className="flex-shrink-0 flex items-center space-x-3 group">
               <div className="w-12 h-12 flex items-center justify-center transition-transform group-hover:scale-105">
                 <img 
-                  src="https://images.squarespace-cdn.com/content/v1/59a9c2ff8dd041f31701dea3/1602745366392-62IIKPSCRXAO464UJ4HA/IC-FOODS+Logo+Better.png"
+                  src="/images/ic-foods-logo.png"
                   alt="IC-FOODS Cube Logo" 
                   className="w-full h-full object-contain"
                   onError={(e) => {
