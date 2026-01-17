@@ -3,8 +3,9 @@ import { CheckCircle2, Star, Globe2 } from 'lucide-react';
 import Papa from 'papaparse';
 
 interface Partner {
-  name: string;
-  logoUrl: string;
+  publish: string;
+  partner_name: string;
+  partner_logo_url: string;
 }
 
 const Partners: React.FC = () => {
@@ -38,7 +39,11 @@ const Partners: React.FC = () => {
           header: true,
           skipEmptyLines: true,
           complete: (results) => {
-            setPartners(results.data as Partner[]);
+            // Filter only rows where publish === "publish"
+            const published = (results.data as Partner[]).filter(
+              (partner) => partner.publish && partner.publish.toLowerCase().trim() === 'publish'
+            );
+            setPartners(published);
             setLoading(false);
           },
           error: (error) => {
@@ -52,6 +57,14 @@ const Partners: React.FC = () => {
         setLoading(false);
       });
   }, []);
+
+  const getLogoUrl = (logoUrl: string) => {
+    if (!logoUrl || !logoUrl.trim()) {
+      return null;
+    }
+    // partner_logo_url is always a filename in the partners_logos folder
+    return `${import.meta.env.BASE_URL}images/partners_logos/${logoUrl.trim()}`;
+  };
 
   return (
     <div className="bg-white min-h-screen">
@@ -160,26 +173,37 @@ const Partners: React.FC = () => {
             {loading ? (
               <div className="col-span-full text-center py-12 text-gray-500">Loading partners...</div>
             ) : (
-              partners.map((partner) => (
-              <div key={partner.name} className="flex flex-col items-center group relative w-full">
-                <div className="w-full h-24 flex items-center justify-center p-4 grayscale">
-                  <img 
-                    src={partner.logoUrl} 
-                    alt={partner.name} 
-                    className="max-h-full max-w-full object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(partner.name)}&background=022851&color=fff&size=128&bold=true`;
-                    }}
-                  />
-                </div>
-                {/* Reveal name on hover as requested */}
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-center pointer-events-none">
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-aggie-blue px-3 py-1">
-                    {partner.name}
-                  </span>
-                </div>
-              </div>
-              ))
+              partners.map((partner) => {
+                const logoUrl = getLogoUrl(partner.partner_logo_url);
+                return (
+                  <div key={partner.partner_name} className="flex flex-col items-center group relative w-full">
+                    <div className="w-full h-24 flex items-center justify-center p-4 grayscale">
+                      {logoUrl ? (
+                        <img 
+                          src={logoUrl} 
+                          alt={partner.partner_name} 
+                          className="max-h-full max-w-full object-contain"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(partner.partner_name)}&background=022851&color=fff&size=128&bold=true`;
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-aggie-gray rounded-lg">
+                          <span className="text-xs text-gray-400 font-semibold text-center px-2">
+                            {partner.partner_name}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    {/* Reveal name on hover as requested */}
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-center pointer-events-none">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-aggie-blue px-3 py-1">
+                        {partner.partner_name}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
             )}
           </div>
           

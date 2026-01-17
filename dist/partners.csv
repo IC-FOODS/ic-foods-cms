@@ -1,11 +1,11 @@
-name,logoUrl
-UC Davis,https://logo.clearbit.com/ucdavis.edu
-NSF,https://images.squarespace-cdn.com/content/v1/59a9c2ff8dd041f31701dea3/1662754933364-GUZOX42JVQAZYCDUO9QF/National_Science_Foundation_Seal.png
-USDA,https://logo.clearbit.com/usda.gov
-FAO,https://logo.clearbit.com/fao.org
-WFP,https://logo.clearbit.com/wfp.org
-Gates Foundation,https://logo.clearbit.com/gatesfoundation.org
-GS1,https://logo.clearbit.com/gs1.org
-CGIAR,https://logo.clearbit.com/cgiar.org
-USAID,https://logo.clearbit.com/usaid.gov
-NIH,https://logo.clearbit.com/nih.gov
+publish,partner_name,partner_logo_url
+draft,Wolfe's Neck Center for Agriculture & the Environment,
+draft,New Harvest,
+publish,Georgetown University,
+publish,Vireo Advisors,
+publish,University of California, Davis,
+publish,Royal Society of Chemistry,
+publish,USDA Agricultural Marketing Service,
+publish,Roots of Change,
+publish,Ohio State University,
+publish,Foodtography.Studio,

@@ -1,0 +1,4 @@
+# Partners Logos Folder
+
+Place partner logo image files (PNG, JPG, SVG, etc.) in this folder.
+Reference them in partners.csv by their filename (e.g., "georgetown-logo.png").

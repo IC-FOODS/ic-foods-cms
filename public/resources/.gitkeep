@@ -1,0 +1,4 @@
+# Resources Folder
+
+Place downloadable resource files (PDFs, Excel files, documents, etc.) in this folder.
+Reference them in rd_resources.csv by their filename (e.g., "document.pdf").

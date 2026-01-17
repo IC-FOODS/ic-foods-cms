@@ -162,7 +162,7 @@ const Home: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 pointer-events-auto">
             <button
-              onClick={() => navigate('/projects')}
+              onClick={() => navigate('/r-and-d')}
               className="bg-aggie-gold text-aggie-blue px-8 py-3 rounded-md font-bold text-lg hover:bg-white transition-all shadow-lg"
             >
               Explore Projects
