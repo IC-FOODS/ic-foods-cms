@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Download, ExternalLink, FileText, Database, Settings, Laptop } from 'lucide-react';
+import { FileText, ArrowRight, BookOpen, Glasses, Library } from 'lucide-react';
 import Papa from 'papaparse';
 
 interface Publication {
@@ -74,6 +74,12 @@ const Publications: React.FC = () => {
     return `${import.meta.env.BASE_URL}resources/${trimmed}`;
   };
 
+  const getPubTypeIcon = (type: string) => {
+    const t = type.toLowerCase();
+    if (t.includes('article') || t.includes('paper')) return <FileText size={20} className="text-aggie-blue" />;
+    return <BookOpen size={20} className="text-aggie-blue" />;
+  };
+
   return (
     <div className="bg-aggie-gray min-h-screen">
       {/* Hero Section Aligned with Partners page */}
@@ -99,101 +105,67 @@ const Publications: React.FC = () => {
               const isProjectFile = projectUrl && !isUrl(pub.project_url || '');
 
               return (
-                <div key={idx} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-aggie-blue mb-2 hover:text-aggie-blueLight transition-colors cursor-default">
-                      {pub.publication_text || 'Untitled Publication'}
+                <div key={idx} className="bg-aggie-gray p-8 rounded-2xl border border-gray-100 group flex flex-col md:flex-row justify-between hover:shadow-lg transition-all">
+                  <div className="flex-grow md:pr-12">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:bg-aggie-gold transition-colors">
+                        {getPubTypeIcon(pub.publication_type)}
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-aggie-blue mb-2 leading-tight group-hover:text-aggie-blueLight transition-colors">
+                      {pub.publication_text}
                     </h3>
-                    {pub.author_list && (
-                      <p className="text-gray-700 font-medium mb-4">{pub.author_list}</p>
-                    )}
-                    
-                    <div className="mb-6 flex flex-wrap gap-3">
+
+                    {pub.author_list && (<p className="text-gray-700 font-medium mb-3 text-sm">
+                      {pub.author_list}
+                    </p>)}
+
+                    <div className="mb-4">
                       {pub.publication_type && (
-                        <span className="text-sm text-aggie-blue bg-blue-50 inline-block px-3 py-1 rounded border border-blue-100 font-semibold">
+                        <span className="inline-flex items-center px-3 py-1 text-[10px] font-bold bg-white text-gray-600 tracking-[0.15em]">
                           {pub.publication_type}
-                        </span>
-                      )}
-                      {pub.method && (
-                        <span className="text-sm text-gray-600 bg-aggie-gray inline-block px-3 py-1 rounded border border-gray-100">
-                          {pub.method}
                         </span>
                       )}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end border-t border-gray-100 pt-6">
-                    <div className="space-y-3">
-                      {publicationFileUrl && (
-                        <div>
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Publication File</span>
-                          <a 
-                            href={publicationFileUrl}
-                            download={pub.publication_file_name}
-                            className="flex items-center text-sm font-bold text-aggie-blue hover:text-aggie-gold transition-colors underline decoration-aggie-gold/30 underline-offset-4"
-                          >
-                            <FileText size={14} className="mr-1" />
-                            {pub.publication_file_name}
-                          </a>
-                        </div>
+                  <div className="mt-8 md:mt-0 flex flex-col justify-center items-start md:items-end md:min-w-[220px] border-t md:border-t-0 md:border-l border-gray-200 pt-6 md:pt-0 md:pl-8 space-y-5">
+                    <a
+                      href={publicationFileUrl}
+                      download={pub.publication_file_name}
+                      className="inline-flex items-center bg-aggie-blue text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-aggie-blueLight transition-all shadow-sm hover:shadow-md w-full md:w-full justify-center"
+                    >
+                      <FileText size={18} className="mr-2" />
+                      View Full Text
+                    </a>
+
+                    <div className="flex flex-col space-y-3 w-full items-start md:items-end pr-2">
+                      {pub.project_url && (
+                        <a
+                          href={projectUrl}
+                          target={isProjectFile ? undefined : "_blank"}
+                          rel={isProjectFile ? undefined : "noopener noreferrer"}
+                          download={isProjectFile ? pub.project_url?.trim() : undefined}
+                          className="flex items-center text-xs font-bold text-aggie-blue hover:text-aggie-gold transition-colors group/link text-right"
+                        >
+                          <Glasses size={14} className="mr-2" /> Project <ArrowRight size={14} className="ml-1 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all" />
+                        </a>
                       )}
                       {resourceUrl && (
-                        <div>
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Resource</span>
-                          <a 
-                            href={resourceUrl}
-                            target={isResourceFile ? undefined : "_blank"}
-                            rel={isResourceFile ? undefined : "noopener noreferrer"}
-                            download={isResourceFile ? pub.resource_url?.trim() : undefined}
-                            className="flex items-center text-sm font-bold text-aggie-blue hover:text-aggie-gold transition-colors underline decoration-aggie-gold/30 underline-offset-4"
-                          >
-                            {isResourceFile ? (
-                              <Download size={14} className="mr-1" />
-                            ) : (
-                              <ExternalLink size={14} className="mr-1" />
-                            )}
-                            {isResourceFile ? 'Download Resource' : 'View Resource'}
-                          </a>
-                        </div>
-                      )}
-                      {projectUrl && (
-                        <div>
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Project</span>
-                          <a 
-                            href={projectUrl}
-                            target={isProjectFile ? undefined : "_blank"}
-                            rel={isProjectFile ? undefined : "noopener noreferrer"}
-                            download={isProjectFile ? pub.project_url?.trim() : undefined}
-                            className="flex items-center text-sm font-bold text-aggie-blue hover:text-aggie-gold transition-colors underline decoration-aggie-gold/30 underline-offset-4"
-                          >
-                            {isProjectFile ? (
-                              <Download size={14} className="mr-1" />
-                            ) : (
-                              <ExternalLink size={14} className="mr-1" />
-                            )}
-                            {isProjectFile ? 'Download Project' : 'View Project'}
-                          </a>
-                        </div>
-                      )}
-                    </div>
-                    
-                    <div className="flex md:justify-end">
-                      {publicationFileUrl ? (
-                        <a 
-                          href={publicationFileUrl}
-                          download={pub.publication_file_name}
-                          className="flex items-center bg-aggie-blue text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-aggie-blueLight transition-all shadow-sm"
+                        <a
+                          href={resourceUrl}
+                          target={isResourceFile ? undefined : "_blank"}
+                          rel={isResourceFile ? undefined : "noopener noreferrer"}
+                          className="flex items-center text-xs font-bold text-aggie-blue hover:text-aggie-gold transition-colors group/link text-right"
                         >
-                          <Download size={16} className="mr-2" />
-                          Download PDF
+                          <Library size={14} className="mr-2" /> Resource <ArrowRight size={14} className="ml-1 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all" />
                         </a>
-                      ) : (
-                        <div className="text-gray-400 text-sm">No publication file available</div>
                       )}
                     </div>
                   </div>
                 </div>
-              );
+              )
             })}
           </div>
         )}
