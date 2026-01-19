@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold mb-4 uppercase text-xs tracking-widest text-gray-500">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/r-and-d" className="hover:text-aggie-gold">R&D</Link></li>
+              <li><Link to="/research" className="hover:text-aggie-gold">R&D</Link></li>
               <li><Link to="/publications" className="hover:text-aggie-gold">Publications</Link></li>
               <li><Link to="/partners" className="hover:text-aggie-gold">Partners</Link></li>
             </ul>
