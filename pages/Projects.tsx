@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   FileText, 
   Settings, 
-  Download, 
+  MonitorPlay, 
   ClipboardCheck, 
   Fingerprint, 
   Database, 
@@ -182,12 +182,18 @@ const Projects: React.FC = () => {
       });
   }, []);
 
-  const filteredProjects = projects.filter(p => {
-    if (activeTab === 'guidelines') return p.category === 'guidelines';
-    if (activeTab === 'technical') return p.category === 'technical';
-    if (activeTab === 'resources') return p.category === 'resources';
-    return false;
-  });
+  const getResourceIcon = (url: string, type: string) => {
+    const lowerUrl = url.toLowerCase();
+    if (lowerUrl.endsWith('.xlsx') || lowerUrl.endsWith('.xls')) return <FileSpreadsheet className="text-aggie-blue" size={20} />;
+    if (lowerUrl.endsWith('.pdf')) return <FileText className="text-aggie-blue" size={20} />;
+    if (type.toLowerCase().includes('webinar')) return <MonitorPlay className="text-aggie-blue" size={20} />;
+    return <Globe className="text-aggie-blue" size={20} />;
+  };
+
+  const isFilename = (url: string) => {
+    const lowerUrl = url.toLowerCase();
+    return (lowerUrl.endsWith('.xlsx') || lowerUrl.endsWith('.xls') || lowerUrl.endsWith('.pdf')) && !lowerUrl.startsWith('http');
+  };
 
   return (
     <div className="bg-white min-h-screen pb-20">
@@ -377,155 +383,47 @@ const Projects: React.FC = () => {
         {/* Section 3: RESOURCES */}
         {activeTab === 'resources' && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {rdResourcesLoading ? (
-              <div className="text-center py-12 text-gray-500">Loading resources...</div>
-            ) : rdResources.length === 0 ? (
-              <div className="text-center py-12 text-gray-500">No resources available.</div>
-            ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {rdResources.map((item, idx) => {
-                  const getResourceTypeIcon = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('guideline')) return <FileText size={24} />;
-                    if (type.includes('report')) return <FileText size={24} />;
-                    if (type.includes('portal')) return <Globe size={24} />;
-                    if (type.includes('book')) return <BookOpen size={24} />;
-                    if (type.includes('webinar')) return <Layout size={24} />;
-                    if (type.includes('training')) return <Settings size={24} />;
-                    if (type.includes('template')) return <FileSpreadsheet size={24} />;
-                    return <Database size={24} />;
-                  };
-
-                  const getResourceTypeColor = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('guideline')) return 'bg-blue-50';
-                    if (type.includes('report')) return 'bg-green-50';
-                    if (type.includes('portal')) return 'bg-purple-50';
-                    if (type.includes('book')) return 'bg-yellow-50';
-                    if (type.includes('webinar')) return 'bg-pink-50';
-                    if (type.includes('training')) return 'bg-orange-50';
-                    if (type.includes('template')) return 'bg-cyan-50';
-                    return 'bg-gray-50';
-                  };
-
-                  const getCardStyle = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('template') || type.includes('guideline')) {
-                      return 'bg-aggie-blue text-white shadow-xl shadow-aggie-blue/10';
-                    }
-                    if (type.includes('report')) {
-                      return 'bg-white border-2 border-aggie-gold shadow-lg';
-                    }
-                    return 'bg-aggie-gray border border-gray-200';
-                  };
-
-                  const getTextClass = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('template') || type.includes('guideline')) {
-                      return 'text-white';
-                    }
-                    return 'text-aggie-blue';
-                  };
-
-                  const getDescClass = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('template') || type.includes('guideline')) {
-                      return 'text-blue-100';
-                    }
-                    return 'text-gray-600';
-                  };
-
-                  const getIconColor = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('template') || type.includes('guideline')) {
-                      return 'text-white';
-                    }
-                    return 'text-aggie-blue';
-                  };
-
-                  const getButtonStyle = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('template') || type.includes('guideline')) {
-                      return 'bg-white text-aggie-blue hover:bg-aggie-gold';
-                    }
-                    return 'bg-aggie-blue text-white hover:bg-aggie-blueLight';
-                  };
-
-                  const getButtonText = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('template')) return 'Download Template';
-                    if (type.includes('guideline')) return 'View Guideline';
-                    if (type.includes('report')) return 'Download Report';
-                    if (type.includes('portal')) return 'Visit Portal';
-                    if (type.includes('webinar')) return 'Watch Webinar';
-                    if (type.includes('training')) return 'Access Training';
-                    return 'View Resource';
-                  };
-
-                  // Check if resource_url is a URL or a filename
-                  const isUrl = (url: string) => {
-                    if (!url) return false;
-                    const trimmed = url.trim();
-                    return trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('www.');
-                  };
-
-                  const getResourceUrl = () => {
-                    if (!item.resource_url) return null;
-                    const trimmed = item.resource_url.trim();
-                    if (isUrl(trimmed)) {
-                      // It's a URL - add https:// if it starts with www.
-                      if (trimmed.startsWith('www.')) {
-                        return `https://${trimmed}`;
-                      }
-                      return trimmed;
-                    } else {
-                      // It's a filename - point to resources folder
-                      return `${import.meta.env.BASE_URL}resources/${trimmed}`;
-                    }
-                  };
-
-                  const resourceUrl = getResourceUrl();
-                  const isFileDownload = resourceUrl && !isUrl(item.resource_url || '');
-
-                  return (
-                    <div key={idx} className={`${getCardStyle()} p-8 rounded-2xl flex flex-col justify-between group hover:shadow-2xl transition-all`}>
-                      <div>
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${getResourceTypeColor()} ${getIconColor()} group-hover:scale-110 transition-transform`}>
-                          {getResourceTypeIcon()}
-                        </div>
-                        {item.resource_type && (
-                          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4 ${getTextClass() === 'text-white' ? 'bg-white/20 text-white' : 'bg-aggie-gray text-aggie-blue'} uppercase tracking-wide`}>
-                            {item.resource_type}
-                          </span>
-                        )}
-                        <h3 className={`text-xl font-bold mb-3 ${getTextClass()}`}>{item.resource_name || 'Untitled Resource'}</h3>
-                        <p className={`text-sm mb-4 leading-relaxed ${getDescClass()}`}>{item.resource_description || 'No description available.'}</p>
-                      </div>
-                      {resourceUrl ? (
-                        <a 
-                          href={resourceUrl}
-                          target={isFileDownload ? undefined : "_blank"}
-                          rel={isFileDownload ? undefined : "noopener noreferrer"}
-                          download={isFileDownload ? item.resource_url?.trim() : undefined}
-                          className={`${getButtonStyle()} px-6 py-3 rounded-lg font-bold flex items-center justify-center transition-all text-sm group/btn`}
-                        >
-                          {isFileDownload ? (
-                            <Download size={16} className="mr-2 group-hover/btn:translate-y-0.5 transition-transform" />
-                          ) : (
-                            <ExternalLink size={16} className="mr-2 group-hover/btn:translate-x-1 transition-transform" />
-                          )}
-                          {getButtonText()}
-                        </a>
-                      ) : (
-                        <div className={`text-center ${getTextClass() === 'text-white' ? 'text-blue-100' : 'text-gray-400'} text-sm py-3`}>
-                          Resource available upon request
-                        </div>
-                      )}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {rdResources.map((item, idx) => (
+                <div key={idx} className="bg-white p-8 rounded-2xl border border-gray-100 group flex flex-col justify-between hover:shadow-xl transition-all duration-300">
+                  <div>
+                    <div className="w-10 h-10 bg-aggie-gray rounded-lg flex items-center justify-center mb-6 shadow-sm group-hover:bg-aggie-gold transition-colors">
+                      {getResourceIcon(item.resource_url, item.resource_type)}
                     </div>
-                  );
-                })}
-              </div>
-            )}
+                    <h3 className="text-xl font-bold text-aggie-blue mb-3">{item.resource_name}</h3>
+                    <p className="text-gray-600 leading-relaxed text-sm mb-6">{item.resource_description}</p>
+                    
+                    <div className="space-y-4 mb-8">
+                      <div className="flex flex-col">
+                        <div className="flex flex-wrap gap-2">
+                          {item.resource_type.split(',').map((type, tIdx) => (
+                            <span 
+                              key={tIdx} 
+                              className="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold bg-aggie-gray border border-gray-100 text-gray-600"
+                            >
+                              {type.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a 
+                    href={item.resource_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center text-aggie-blue font-bold text-sm hover:text-aggie-gold transition-colors group/btn w-fit"
+                  >
+                    {isFilename(item.resource_url) ? (
+                      <><FileText size={16} className="mr-2" /> Read Full File</>
+                    ) : (
+                      <><Globe size={16} className="mr-2" /> Visit Resource</>
+                    )}
+                    <ArrowRight size={16} className="ml-2 group-hover/btn:translate-x-1 transition-transform" /> 
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
