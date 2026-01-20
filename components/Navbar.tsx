@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
     { name: 'R&D', path: '/research' },
     { name: 'Publications', path: '/publications' },
     { name: 'Partners', path: '/partners' },
-    { name: 'About Us', path: '/about' },
+    { name: 'About', path: '/about' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
               to="/connect"
               className="bg-aggie-gold text-aggie-blue px-4 py-2 rounded-md text-sm font-bold hover:bg-white transition-all"
             >
-              Connect With Us
+              Connect
             </Link>
           </div>
 
