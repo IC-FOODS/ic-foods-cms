@@ -155,10 +155,10 @@ const Home: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pointer-events-none">
           <h1 className="text-4xl font-extrabold mb-6 tracking-tight pointer-events-auto">
-            Connecting the Dots of the <span className="text-aggie-gold">Global Food System</span>
+            Connecting the Dots of the <span className="text-aggie-gold">Global Food System since 2016</span>
           </h1>
           <p className="text-xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed pointer-events-auto">
-            The International Center for Food Ontology Operability Data and Semantics (IC-FOODS) creates the common language computers need to understand our food.
+            At the International Center for Food Ontology Operability Data and Semantics (IC-FOODS), we build cyberinfrastructure for the emerging Internet of Food.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 pointer-events-auto">
             <button
