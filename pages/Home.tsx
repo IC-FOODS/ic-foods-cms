@@ -240,7 +240,7 @@ const Home: React.FC = () => {
                 </p>
                 <div className="mt-8 flex items-center space-x-3">
                   <div className="h-1 w-8 bg-aggie-gold rounded-full"></div>
-                  <span className="text-sm font-bold uppercase tracking-widest text-aggie-blueLight">IC-FOODS Vision</span>
+                  
                 </div>
               </div>
             </div>
