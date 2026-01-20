@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  FileText, 
-  Settings, 
-  MonitorPlay, 
-  ClipboardCheck, 
-  Fingerprint, 
-  Database, 
+import {
+  FileText,
+  Settings,
+  MonitorPlay,
+  ClipboardCheck,
+  Glasses,
+  Database,
   ArrowRight,
   BookOpen,
-  Layout,
+  Library,
   FileSpreadsheet,
   ExternalLink,
   Calendar,
@@ -70,8 +70,8 @@ const Projects: React.FC = () => {
 
   const tabs = [
     { id: 'guidelines', label: 'Research Areas', icon: ClipboardCheck },
-    { id: 'technical', label: 'R&D Projects', icon: Fingerprint },
-    { id: 'resources', label: 'Resources', icon: Layout },
+    { id: 'technical', label: 'R&D Projects', icon: Glasses },
+    { id: 'resources', label: 'Resources', icon: Library },
   ];
 
   // Load projects CSV for other tabs
@@ -215,11 +215,10 @@ const Projects: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center space-x-2 py-6 border-b-2 font-bold text-sm uppercase tracking-wider transition-all whitespace-nowrap ${
-                  activeTab === tab.id
-                    ? 'border-aggie-gold text-aggie-blue'
-                    : 'border-transparent text-gray-400 hover:text-aggie-blueLight'
-                }`}
+                className={`flex items-center space-x-2 py-6 border-b-2 font-bold text-sm uppercase tracking-wider transition-all whitespace-nowrap ${activeTab === tab.id
+                  ? 'border-aggie-gold text-aggie-blue'
+                  : 'border-transparent text-gray-400 hover:text-aggie-blueLight'
+                  }`}
               >
                 <tab.icon size={18} />
                 <span>{tab.label}</span>
@@ -247,32 +246,40 @@ const Projects: React.FC = () => {
                       </div>
                       <h3 className="text-xl font-bold text-aggie-blue mb-3">{item.ra_name || 'Untitled Research Area'}</h3>
                       <p className="text-gray-600 leading-relaxed text-sm mb-6">{item.ra_description || 'No description available.'}</p>
-                      {(item.partner_name || item.resource_name || item.output_types) && (
+                      {(item.partner_name || item.resource_name) && (
                         <div className="mb-6 space-y-2 text-xs text-gray-500">
-                          {item.partner_name && (
+                          <div className="space-y-4 mb-8">
+                            <div className="flex flex-col">
+                              <div className="flex flex-wrap gap-2">
+                                {item.output_types.split('|').map((type, tIdx) => (
+                                  <span
+                                    key={tIdx}
+                                    className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-white border border-gray-200 text-aggie-blue uppercase tracking-wider"
+                                  >
+                                    {type.trim()}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          {/* {item.partner_name && (
                             <div><span className="font-semibold">Partner:</span> {item.partner_name}</div>
                           )}
                           {item.resource_name && (
                             <div><span className="font-semibold">Resource:</span> {item.resource_name}</div>
-                          )}
-                          {item.output_types && (
-                            <div><span className="font-semibold">Output Types:</span> {item.output_types}</div>
-                          )}
+                          )} */}
                         </div>
                       )}
                     </div>
-                    {item.external_ra_url ? (
-                      <a 
+                    {item.external_ra_url && (
+                      <a
                         href={item.external_ra_url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center text-aggie-blue font-bold text-sm hover:text-aggie-gold transition-colors group/btn w-fit"
                       >
-                        <ExternalLink size={16} className="mr-2 group-hover/btn:translate-y-0.5 transition-transform" /> 
-                        View Research Area
+                        View Research Area <ArrowRight size={16} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
                       </a>
-                    ) : (
-                      <div className="text-gray-400 text-sm">No external link available</div>
                     )}
                   </div>
                 ))}
@@ -293,85 +300,59 @@ const Projects: React.FC = () => {
                 {rdProjects.map((item, idx) => {
                   const getResourceTypeIcon = () => {
                     const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('guideline')) return <FileText className="text-aggie-blue" size={24} />;
-                    if (type.includes('report')) return <FileText className="text-aggie-blue" size={24} />;
-                    if (type.includes('portal')) return <Globe className="text-aggie-blue" size={24} />;
-                    if (type.includes('book')) return <BookOpen className="text-aggie-blue" size={24} />;
-                    if (type.includes('webinar')) return <Layout className="text-aggie-blue" size={24} />;
-                    if (type.includes('training')) return <Settings className="text-aggie-blue" size={24} />;
-                    return <Database className="text-aggie-blue" size={24} />;
-                  };
-
-                  const getResourceTypeColor = () => {
-                    const type = item.resource_type?.toLowerCase() || '';
-                    if (type.includes('guideline')) return 'bg-blue-50';
-                    if (type.includes('report')) return 'bg-green-50';
-                    if (type.includes('portal')) return 'bg-purple-50';
-                    if (type.includes('book')) return 'bg-yellow-50';
-                    if (type.includes('webinar')) return 'bg-pink-50';
-                    if (type.includes('training')) return 'bg-orange-50';
-                    return 'bg-gray-50';
+                    if (type.includes('guideline')) return <FileText className="text-aggie-blue" size={20} />;
+                    if (type.includes('report')) return <FileText className="text-aggie-blue" size={20} />;
+                    if (type.includes('portal')) return <Globe className="text-aggie-blue" size={20} />;
+                    if (type.includes('book')) return <BookOpen className="text-aggie-blue" size={20} />;
+                    if (type.includes('webinar')) return <Glasses className="text-aggie-blue" size={20} />;
+                    if (type.includes('training')) return <Settings className="text-aggie-blue" size={20} />;
+                    return <Database className="text-aggie-blue" size={20} />;
                   };
 
                   return (
-                    <div key={idx} className="bg-white p-8 rounded-2xl border-2 border-gray-100 shadow-sm hover:shadow-lg transition-all group">
-                      <div className="flex items-start justify-between mb-6">
-                        <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${getResourceTypeColor()} group-hover:scale-110 transition-transform`}>
+                    <div key={idx} className="bg-white p-8 rounded-2xl border border-aggie-gold group flex flex-col justify-between hover:shadow-xl hover:border-aggie-gold transition-all duration-300">
+                      <div>
+                        <div className={`w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-6 shadow-sm group-hover:bg-aggie-gold transition-colors`}>
                           {getResourceTypeIcon()}
                         </div>
-                        {item.resource_type && (
-                          <span className="px-3 py-1 bg-aggie-gray text-aggie-blue text-xs font-semibold rounded-full uppercase tracking-wide">
-                            {item.resource_type}
-                          </span>
+                        <h3 className="text-xl font-bold text-aggie-blue mb-3">{item.rd_name}</h3>
+                        {item.rd_description && (
+                          <p className="text-gray-600 leading-relaxed text-sm mb-6">{item.rd_description}</p>
                         )}
-                      </div>
-                      
-                      <h3 className="text-2xl font-bold text-aggie-blue mb-3">{item.rd_name || 'Untitled Project'}</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6 text-sm">{item.rd_description || 'No description available.'}</p>
-                      
-                      <div className="space-y-3 mb-6 text-xs">
-                        {item.rd_period && (
-                          <div className="flex items-center text-gray-600">
-                            <Calendar size={14} className="mr-2 text-aggie-gold" />
-                            <span className="font-semibold">Period:</span>
-                            <span className="ml-2">{item.rd_period}</span>
-                          </div>
-                        )}
-                        {item.funder_name && (
-                          <div className="flex items-center text-gray-600">
-                            <Award size={14} className="mr-2 text-aggie-gold" />
-                            <span className="font-semibold">Funded by:</span>
-                            <span className="ml-2">{item.funder_name}</span>
-                          </div>
-                        )}
-                        {item.partner_name && (
-                          <div className="flex items-center text-gray-600">
-                            <Building2 size={14} className="mr-2 text-aggie-gold" />
-                            <span className="font-semibold">Partner:</span>
-                            <span className="ml-2">{item.partner_name}</span>
-                          </div>
-                        )}
-                        {item.resource_name && (
-                          <div className="text-gray-600">
-                            <span className="font-semibold">Resource:</span>
-                            <span className="ml-2">{item.resource_name}</span>
-                          </div>
-                        )}
+
+                        <div className="space-y-4 mb-8">
+                          {item.resource_type && (
+                            <div className="flex flex-wrap gap-2">
+                              {item.resource_type.split(',').map((type, tIdx) => (
+                                <span
+                                  key={tIdx}
+                                  className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-aggie-gray/50 border border-gray-200 text-aggie-blue uppercase tracking-wider"
+                                >
+                                  {type.trim()}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          {/* {item.partner_name && (
+                            <p className="text-[11px] text-gray-500 font-semibold italic">
+                              Partnered with: {item.partner_name.replace(/"/g, '')}
+                            </p>
+                          )} */}
+                        </div>
                       </div>
 
                       {item.external_rd_url && (
-                        <a 
-                          href={item.external_rd_url}
+                        <a
+                          href={item.external_rd_url.startsWith('http') ? item.external_rd_url : `https://${item.external_rd_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center bg-aggie-blue text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-aggie-blueLight transition-all group/btn"
+                          className="flex items-center text-aggie-blue font-bold text-sm hover:text-aggie-gold transition-colors group/btn w-fit"
                         >
-                          <ExternalLink size={16} className="mr-2 group-hover/btn:translate-x-1 transition-transform" />
-                          View Project
+                          View Project <ArrowRight size={16} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
                         </a>
                       )}
                     </div>
-                  );
+                  )
                 })}
               </div>
             )}
@@ -390,14 +371,14 @@ const Projects: React.FC = () => {
                     </div>
                     <h3 className="text-xl font-bold text-aggie-blue mb-3">{item.resource_name}</h3>
                     <p className="text-gray-600 leading-relaxed text-sm mb-6">{item.resource_description}</p>
-                    
+
                     <div className="space-y-4 mb-8">
                       <div className="flex flex-col">
                         <div className="flex flex-wrap gap-2">
                           {item.resource_type.split(',').map((type, tIdx) => (
-                            <span 
-                              key={tIdx} 
-                              className="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold bg-aggie-gray border border-gray-100 text-gray-600"
+                            <span
+                              key={tIdx}
+                              className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-aggie-gray/50 border border-gray-200 text-aggie-blue uppercase tracking-wider"
                             >
                               {type.trim()}
                             </span>
@@ -406,9 +387,9 @@ const Projects: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <a 
-                    href={item.resource_url} 
-                    target="_blank" 
+                  <a
+                    href={item.resource_url}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center text-aggie-blue font-bold text-sm hover:text-aggie-gold transition-colors group/btn w-fit"
                   >
@@ -417,7 +398,7 @@ const Projects: React.FC = () => {
                     ) : (
                       <><Globe size={16} className="mr-2" /> Visit Resource</>
                     )}
-                    <ArrowRight size={16} className="ml-2 group-hover/btn:translate-x-1 transition-transform" /> 
+                    <ArrowRight size={16} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
                   </a>
                 </div>
               ))}
