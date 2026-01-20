@@ -176,6 +176,48 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Problem / Why Now / How Section */}
+      <section className="py-20 bg-aggie-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-aggie-blue">The Challenge We're Solving</h2>
+            <div className="w-24 h-1 bg-aggie-gold mx-auto mt-4"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+              <div className="w-12 h-12 bg-red-100 text-red-600 rounded-lg flex items-center justify-center mb-6">
+                <Search size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">The Problem</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Food data is "siloed." A hospital's nutrition data can't talk to a supermarket's inventory, and neither can talk to a farmer's climate reports. This makes solving global hunger or improving public health nearly impossible at scale.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+              <div className="w-12 h-12 bg-blue-100 text-aggie-blueLight rounded-lg flex items-center justify-center mb-6">
+                <Globe size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Why Now?</h3>
+              <p className="text-gray-600 leading-relaxed">
+                We are facing a "Perfect Storm": Climate change is disrupting crops, AI needs high-quality data to be useful, and global supply chains are more fragile than ever. We can no longer afford to work in the dark.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+              <div className="w-12 h-12 bg-yellow-100 text-aggie-gold rounded-lg flex items-center justify-center mb-6">
+                <ShieldCheck size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">How We Solve It</h3>
+              <p className="text-gray-600 leading-relaxed">
+                We build <strong>Interoperable Standards</strong>. We don't just collect data; we build the infrastructure that allows *everyone* to share data safely, ethically, and accurately across the entire food ecosystem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Plain Language Explainer Section */}
       <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -201,48 +243,6 @@ const Home: React.FC = () => {
                   <span className="text-sm font-bold uppercase tracking-widest text-aggie-blueLight">IC-FOODS Vision</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem / Why Now / How Section */}
-      <section className="py-20 bg-aggie-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-aggie-blue">The Challenge We're Solving</h2>
-            <div className="w-24 h-1 bg-aggie-gold mx-auto mt-4"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-red-100 text-red-600 rounded-lg flex items-center justify-center mb-6">
-                <Search size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">The Problem</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Food data is "siloed." A hospital’s nutrition data can't talk to a supermarket’s inventory, and neither can talk to a farmer’s climate reports. This makes solving global hunger or improving public health nearly impossible at scale.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-blue-100 text-aggie-blueLight rounded-lg flex items-center justify-center mb-6">
-                <Globe size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">Why Now?</h3>
-              <p className="text-gray-600 leading-relaxed">
-                We are facing a "Perfect Storm": Climate change is disrupting crops, AI needs high-quality data to be useful, and global supply chains are more fragile than ever. We can no longer afford to work in the dark.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 bg-yellow-100 text-aggie-gold rounded-lg flex items-center justify-center mb-6">
-                <ShieldCheck size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">How We Solve It</h3>
-              <p className="text-gray-600 leading-relaxed">
-                We build <strong>Interoperable Standards</strong>. We don't just collect data; we build the infrastructure that allows *everyone* to share data safely, ethically, and accurately across the entire food ecosystem.
-              </p>
             </div>
           </div>
         </div>

@@ -70,8 +70,8 @@ const Publications: React.FC = () => {
   const getPublicationFileUrl = (filename: string) => {
     if (!filename) return null;
     const trimmed = filename.trim();
-    // Publication files are also in the resources folder
-    return `${import.meta.env.BASE_URL}resources/${trimmed}`;
+    // Publication files are in the publications folder
+    return `${import.meta.env.BASE_URL}publication/${trimmed}`;
   };
 
   const getPubTypeIcon = (type: string) => {
