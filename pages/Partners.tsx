@@ -13,7 +13,10 @@ const Partners: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const offerings = [
-    {
+     {
+      title: "Research and Development",
+      desc: "Co-develop technical infrastructures for cross-cutting food systems research."
+    },{
       title: "Data Interoperability Audits",
       desc: "Comprehensive analysis of your organization's current data structures to identify silos and mapping opportunities with global standards."
     },
@@ -81,7 +84,7 @@ const Partners: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           {/* Offerings Section */}
           <div>
-            <h2 className="text-3xl font-bold text-aggie-blue mb-8 text-center">What We Offer Our Partners</h2>
+            <h2 className="text-3xl font-bold text-aggie-blue mb-8 text-center">Collaborate With Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {offerings.map((offering, idx) => (
                 <div key={idx} className="group flex items-start space-x-4 bg-aggie-gray p-6 rounded-xl border border-gray-100 shadow-sm">
