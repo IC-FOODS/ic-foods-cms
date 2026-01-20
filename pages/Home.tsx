@@ -253,20 +253,20 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-aggie-gold mb-2">50+</div>
+              <div className="text-4xl font-bold text-aggie-gold mb-2">80+</div>
               <div className="text-sm uppercase tracking-widest text-gray-300">Global Partners</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-aggie-gold mb-2">12k+</div>
-              <div className="text-sm uppercase tracking-widest text-gray-300">Ontology Terms</div>
+              <div className="text-4xl font-bold text-aggie-gold mb-2">20+</div>
+              <div className="text-sm uppercase tracking-widest text-gray-300">Ontology / Standards Co-Developed</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-aggie-gold mb-2">500k+</div>
-              <div className="text-sm uppercase tracking-widest text-gray-300">Data Downloads</div>
+              <div className="text-4xl font-bold text-aggie-gold mb-2">$60M++</div>
+              <div className="text-sm uppercase tracking-widest text-gray-300">Collaborative Research Funded</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-aggie-gold mb-2">100+</div>
-              <div className="text-sm uppercase tracking-widest text-gray-300">Active Projects</div>
+              <div className="text-4xl font-bold text-aggie-gold mb-2">25+</div>
+              <div className="text-sm uppercase tracking-widest text-gray-300">Publications</div>
             </div>
           </div>
         </div>
