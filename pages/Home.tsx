@@ -261,7 +261,7 @@ const Home: React.FC = () => {
               <div className="text-sm uppercase tracking-widest text-gray-300">Ontology / Standards Co-Developed</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-aggie-gold mb-2">$60M++</div>
+              <div className="text-4xl font-bold text-aggie-gold mb-2">$60M+</div>
               <div className="text-sm uppercase tracking-widest text-gray-300">Collaborative Research Funded</div>
             </div>
             <div>
