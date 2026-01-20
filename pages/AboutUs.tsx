@@ -144,23 +144,27 @@ const AboutUs: React.FC = () => {
             <div className="max-w-4xl mx-auto py-8">
               <div className="prose prose-lg text-gray-600 space-y-6">
                 <p className="text-xl font-medium text-aggie-blueLight leading-relaxed">
-                  The mission of IC-FOODS is to create the architectural foundation for a global, decentralized, and transparent food system.
+                Our mission is to create the foundations for global, decentralized, traceable, transparent, and trustworthy food systems.
                 </p>
                 <p>
-                  We are building a common language—an "Ontology of Food"—that allows for seamless communication between different sectors of the food industry, from agriculture and manufacturing to nutrition and personalized health.
+                We develop shared language, standards, and digital infrastructure enabling seamless communication across food system sectors--from agriculture and manufacturing to nutrition and health.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
                   <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
-                    <h4 className="font-bold text-aggie-blue mb-2">Decentralization</h4>
-                    <p className="text-sm">Empowering local food systems with data tools that were previously only available to industrial giants.</p>
+                    <h4 className="font-bold text-aggie-blue mb-2">Lowering barriers to entry</h4>
+                    <p className="text-sm">Making it easier for individuals and small businesses to use digital tools, participate in markets, and succeed—without needing specialized expertise or resources.</p>
                   </div>
                   <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
-                    <h4 className="font-bold text-aggie-blue mb-2">Equity</h4>
-                    <p className="text-sm">Ensuring that food data sovereignty belongs to the producers and communities, not just the platforms.</p>
+                    <h4 className="font-bold text-aggie-blue mb-2">Sovereignty</h4>
+                    <p className="text-sm">Ensuring ownership of food data belongs to the producers, artisans, and communities who create it.</p>
                   </div>
                   <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
                     <h4 className="font-bold text-aggie-blue mb-2">Interoperability</h4>
-                    <p className="text-sm">Connecting silos so that information flows as freely as the physical products in the supply chain.</p>
+                    <p className="text-sm">Creating interoperable standards and infrastructure that connect fragmented food system data--improving market stability and competition while benefitting consumers with more complete information about their food.</p>
+                  </div>
+                  <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
+                    <h4 className="font-bold text-aggie-blue mb-2">Decentralization</h4>
+                    <p className="text-sm">Equipping local food system actors with digital tools previously available only to industrial giants.</p>
                   </div>
                 </div>
               </div>

@@ -177,7 +177,7 @@ const Partners: React.FC = () => {
                 const logoUrl = getLogoUrl(partner.partner_logo_url);
                 return (
                   <div key={partner.partner_name} className="flex flex-col items-center group relative w-full">
-                    <div className="w-full h-24 flex items-center justify-center p-4 grayscale">
+                    <div className="w-full h-24 flex items-center justify-center p-4">
                       {logoUrl ? (
                         <img 
                           src={logoUrl} 

@@ -359,7 +359,7 @@ const Projects: React.FC = () => {
                         )}
                       </div>
 
-                      {item.external_rd_url ? (
+                      {item.external_rd_url && (
                         <a 
                           href={item.external_rd_url}
                           target="_blank"
@@ -369,8 +369,6 @@ const Projects: React.FC = () => {
                           <ExternalLink size={16} className="mr-2 group-hover/btn:translate-x-1 transition-transform" />
                           View Project
                         </a>
-                      ) : (
-                        <div className="text-center text-gray-400 text-sm py-3">No external link available</div>
                       )}
                     </div>
                   );
