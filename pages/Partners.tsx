@@ -46,7 +46,13 @@ const Partners: React.FC = () => {
             const published = (results.data as Partner[]).filter(
               (partner) => partner.publish && partner.publish.toLowerCase().trim() === 'publish'
             );
-            setPartners(published);
+            // Sort partners alphabetically by partner_name (case-insensitive)
+            const sorted = published.sort((a, b) => {
+              const nameA = (a.partner_name || '').toLowerCase().trim();
+              const nameB = (b.partner_name || '').toLowerCase().trim();
+              return nameA.localeCompare(nameB);
+            });
+            setPartners(sorted);
             setLoading(false);
           },
           error: (error) => {

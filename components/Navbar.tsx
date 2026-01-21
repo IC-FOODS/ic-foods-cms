@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
     { name: 'Publications', path: '/publications' },
     { name: 'Partners', path: '/partners' },
     { name: 'About', path: '/about' },
+    { name: 'Conferences', path: '/conferences' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

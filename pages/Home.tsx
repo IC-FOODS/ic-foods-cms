@@ -211,7 +211,7 @@ const Home: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold mb-4">How We Solve It</h3>
               <p className="text-gray-600 leading-relaxed">
-                We build <strong>Interoperable Standards</strong>. We don't just collect data; we build the infrastructure that allows *everyone* to share data safely, ethically, and accurately across the entire food ecosystem.
+                We build <strong>Interoperable Standards</strong>. We don't just collect data; we build the infrastructure that allows *everyone* to share data safely, ethically, and accurately across the entire food system.
               </p>
             </div>
           </div>

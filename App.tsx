@@ -6,6 +6,7 @@ import Projects from './pages/Projects';
 import Publications from './pages/Publications';
 import AboutUs from './pages/AboutUs';
 import Partners from './pages/Partners';
+import Conferences from './pages/Conferences';
 import Connect from './pages/Connect';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -20,6 +21,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/research" element={<Projects />} />
             <Route path="/publications" element={<Publications />} />
+            <Route path="/conferences" element={<Conferences />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/connect" element={<Connect />} />
