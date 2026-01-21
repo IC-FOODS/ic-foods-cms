@@ -110,7 +110,7 @@ const AboutUs: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold mb-4">About IC-FOODS</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            Democratizing the world's food system through semantic standards, interoperability, and ethical data engineering.
+            Improving local-to-global food systems through semantic standards, interoperability, and ethical data engineering.
           </p>
         </div>
       </div>
