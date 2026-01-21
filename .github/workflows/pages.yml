@@ -36,9 +36,8 @@ jobs:
         run: npm run build
         env:
           # Base path for GitHub Pages deployment
-          # Using '/' for custom domain (ic-foods.org)
-          # If deploying to subdirectory, use: VITE_BASE_PATH: /repo-name/
-          VITE_BASE_PATH: /
+          # Repository name: ic-foods-website
+          VITE_BASE_PATH: /ic-foods-website/
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
