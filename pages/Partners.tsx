@@ -126,7 +126,7 @@ const Partners: React.FC = () => {
             <div className="w-16 h-1 bg-aggie-gold mx-auto mt-4 rounded-full"></div>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8 items-center justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-16 gap-x-8 justify-items-center">
             {loading ? (
               <div className="col-span-full text-center py-12 text-gray-500">Loading partners...</div>
             ) : (
@@ -153,8 +153,8 @@ const Partners: React.FC = () => {
                       )}
                     </div>
                     {/* Reveal name on hover as requested */}
-                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-center pointer-events-none">
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-aggie-blue px-3 py-1">
+                    <div className="mt-4 opacity-50 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-center pointer-events-none">
+                      <span className="text-[11px] font-bold tracking-widest text-aggie-blue px-3 py-1">
                         {partner.partner_name}
                       </span>
                     </div>
