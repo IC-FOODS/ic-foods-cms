@@ -254,7 +254,7 @@ const Projects: React.FC = () => {
                                 {item.output_types.split('|').map((type, tIdx) => (
                                   <span
                                     key={tIdx}
-                                    className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-white border border-gray-200 text-aggie-blue uppercase tracking-wider"
+                                    className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-aggie-blue/5 rounded-full text-aggie-blue uppercase tracking-wider"
                                   >
                                     {type.trim()}
                                   </span>
@@ -312,7 +312,7 @@ const Projects: React.FC = () => {
                   return (
                     <div key={idx} className="bg-white p-8 rounded-2xl border border-aggie-gold group flex flex-col justify-between hover:shadow-xl hover:border-aggie-gold transition-all duration-300">
                       <div>
-                        <div className={`w-10 h-10 bg-white rounded-lg flex items-center justify-center mb-6 shadow-sm group-hover:bg-aggie-gold transition-colors`}>
+                        <div className={`w-10 h-10 bg-aggie-gold/20 rounded-lg flex items-center justify-center mb-6 shadow-sm group-hover:bg-aggie-gold transition-colors`}>
                           {getResourceTypeIcon()}
                         </div>
                         <h3 className="text-xl font-bold text-aggie-blue mb-3">{item.rd_name}</h3>
@@ -326,7 +326,7 @@ const Projects: React.FC = () => {
                               {item.resource_type.split(',').map((type, tIdx) => (
                                 <span
                                   key={tIdx}
-                                  className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-aggie-gray/50 border border-gray-200 text-aggie-blue uppercase tracking-wider"
+                                  className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-aggie-blue/5 rounded-full text-aggie-blue uppercase tracking-wider"
                                 >
                                   {type.trim()}
                                 </span>
@@ -378,7 +378,7 @@ const Projects: React.FC = () => {
                           {item.resource_type.split(',').map((type, tIdx) => (
                             <span
                               key={tIdx}
-                              className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-aggie-gray/50 border border-gray-200 text-aggie-blue uppercase tracking-wider"
+                              className="inline-flex items-center px-2.5 py-1 text-[10px] font-bold bg-aggie-blue/5 rounded-full text-aggie-blue uppercase tracking-wider"
                             >
                               {type.trim()}
                             </span>
