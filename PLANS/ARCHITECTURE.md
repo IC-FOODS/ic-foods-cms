@@ -145,7 +145,7 @@ The [ic-foods-website](https://github.com/IC-FOODS/ic-foods-website) repo is the
 - Base Wagtail templates from KnowBrow provide layout structure
 - IC-FOODS templates extend the base and apply Aggie theming via CSS overrides
 - Other CMS sites (future) would provide their own theme overrides
-- Viz tools accept a `theme` prop to match the host CMS's look
+- Viz tools receive theme name via iframe URL params and `postMessage`, and apply matching styles internally
 
 ## Developer Workflow
 
@@ -185,7 +185,20 @@ python manage.py runserver
 - Convert CSV data into Wagtail-managed content
 - Set up Wagtail snippets for reusable content (partners, publications)
 
-### Step 4: Viz Tool Embedding
-- Add GraphMap widget to relevant pages
-- Add Food Omics Explorer widget to data exploration pages
-- Configure API endpoints for the embedded viz tools
+### Step 4: Viz Tool Embedding (iframe)
+- Embed GraphMap and Food Omics Explorer as iframes in relevant Wagtail templates
+- Pass theme (`aggie`), API endpoint, and initial context via iframe URL params
+- Implement `postMessage` bridge for auth token injection and selection events
+- Example:
+
+```html
+<!-- In a Wagtail template -->
+{% load wagtailcore_tags %}
+<iframe
+  src="https://graphmap.uknowgrow.org?api={{ api_endpoint }}&theme=aggie&node={{ page.initial_node_id }}"
+  width="100%" height="600"
+  allow="clipboard-write"
+></iframe>
+```
+
+See [KnowBrow ARCHITECTURE.md](https://github.com/UKnowGrow/knowbrow/blob/main/PLANS/ARCHITECTURE.md) for the full iframe integration contract.
