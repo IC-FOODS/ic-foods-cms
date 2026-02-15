@@ -1,15 +1,23 @@
 
 import React from 'react';
 import { MessageSquare, Briefcase, GraduationCap } from 'lucide-react';
+import { useCmsPage, stripHtml } from '../lib/useCmsPage';
 
 const Connect: React.FC = () => {
+  const { page: cmsPage } = useCmsPage('connect');
+
+  const heroTitle = cmsPage?.title || 'Connect With Us';
+  const heroSubtitle = cmsPage?.intro
+    ? stripHtml(cmsPage.intro)
+    : "Interested in exploring how food ontologies can transform your organization's data? Let's start a conversation.";
+
   return (
     <div className="bg-white min-h-screen">
       <div className="ucd-gradient text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">Connect With Us</h1>
+          <h1 className="text-4xl font-bold mb-4">{heroTitle}</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            Interested in exploring how food ontologies can transform your organization's data? Let's start a conversation.
+            {heroSubtitle}
           </p>
         </div>
       </div>

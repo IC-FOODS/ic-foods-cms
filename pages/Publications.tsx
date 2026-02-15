@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, ArrowRight, BookOpen, Glasses, Library } from 'lucide-react';
 import Papa from 'papaparse';
+import { useCmsPage, stripHtml } from '../lib/useCmsPage';
 
 interface Publication {
   publish: string;
@@ -23,6 +24,12 @@ interface Publication {
 const Publications: React.FC = () => {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const { page: cmsPage } = useCmsPage('publications');
+  const heroTitle = cmsPage?.title || 'Select Publications';
+  const heroSubtitle = cmsPage?.body
+    ? stripHtml(cmsPage.body)
+    : 'Peer-reviewed publications, technical white papers, and curated datasets that demonstrate our commitment to academic excellence and research rigor.';
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}publications.csv`)
@@ -108,9 +115,9 @@ const Publications: React.FC = () => {
       {/* Hero Section Aligned with Partners page */}
       <div className="ucd-gradient text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">Select Publications</h1>
+          <h1 className="text-4xl font-bold mb-4">{heroTitle}</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            Peer-reviewed publications, technical white papers, and curated datasets that demonstrate our commitment to academic excellence and research rigor.
+            {heroSubtitle}
           </p>
         </div>
       </div>

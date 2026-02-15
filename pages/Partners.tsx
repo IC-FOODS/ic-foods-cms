@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import Papa from 'papaparse';
+import { useCmsPage, stripHtml } from '../lib/useCmsPage';
 
 interface Partner {
   publish: string;
@@ -11,6 +12,12 @@ interface Partner {
 const Partners: React.FC = () => {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const { page: cmsPage } = useCmsPage('partners');
+  const heroTitle = cmsPage?.title || 'Strategic Partners';
+  const heroSubtitle = cmsPage?.body
+    ? stripHtml(cmsPage.body)
+    : 'IC-FOODS collaborates with global institutions to build the semantic infrastructure required for a resilient and equitable global food system.';
 
   const offerings = [
      {
@@ -79,9 +86,9 @@ const Partners: React.FC = () => {
     <div className="bg-white min-h-screen">
       <div className="ucd-gradient text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">Strategic Partners</h1>
+          <h1 className="text-4xl font-bold mb-4">{heroTitle}</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            IC-FOODS collaborates with global institutions to build the semantic infrastructure required for a resilient and equitable global food system.
+            {heroSubtitle}
           </p>
         </div>
       </div>

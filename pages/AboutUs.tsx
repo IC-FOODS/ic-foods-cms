@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Linkedin, Target, Users, GraduationCap } from 'lucide-react';
 import Papa from 'papaparse';
+import { useCmsPage, richTextHtml } from '../lib/useCmsPage';
 
 interface TeamMember {
   publish: string;
@@ -15,12 +16,36 @@ interface TeamMember {
   member_orcid: string;
 }
 
+// Fallback content when CMS is unavailable
+const FALLBACK = {
+  heroTitle: 'About IC-FOODS',
+  heroSubtitle: 'Improving local-to-global food systems through semantic standards, interoperability, and ethical data engineering.',
+  missionIntro: 'Our mission is to create the foundations for global, decentralized, traceable, transparent, and trustworthy food systems.',
+  missionBody: 'We develop shared language, standards, and digital infrastructure enabling seamless communication across food system sectors--from agriculture and manufacturing to nutrition and health.',
+  coreValues: [
+    { title: 'Lowering barriers to entry', description: 'Making it easier for individuals and small businesses to use digital tools, participate in markets, and succeed\u2014without needing specialized expertise or resources.' },
+    { title: 'Sovereignty', description: 'Ensuring ownership of food data belongs to the producers, artisans, and communities who create it.' },
+    { title: 'Interoperability', description: 'Creating interoperable standards and infrastructure that connect fragmented food system data--improving market stability and competition while benefitting consumers with more complete information about their food.' },
+    { title: 'Decentralization', description: 'Equipping local food system actors with digital tools previously available only to industrial giants.' },
+  ],
+};
+
 const AboutUs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'mission' | 'team'>('team');
   const [teamFilter, setTeamFilter] = useState<'All' | 'Board' | 'Staff' | 'Advisors' | 'Fellows' | 'Emeriti' | 'Alumni'>('All');
   const [team, setTeam] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+
+  // Fetch CMS content for the About page
+  const { page: cmsPage } = useCmsPage('about');
+
+  // Derive display content from CMS or fallback
+  const heroTitle = cmsPage?.title || FALLBACK.heroTitle;
+  const heroSubtitle = cmsPage?.meta?.search_description || FALLBACK.heroSubtitle;
+  const missionBody = cmsPage?.body || null;
+  const coreValues: { title: string; description: string }[] =
+    cmsPage?.core_values?.map((block: any) => block.value) || FALLBACK.coreValues;
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}about_team.csv`)
@@ -108,9 +133,9 @@ const AboutUs: React.FC = () => {
       {/* Hero Section */}
       <div className="ucd-gradient text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">About IC-FOODS</h1>
+          <h1 className="text-4xl font-bold mb-4">{heroTitle}</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            Improving local-to-global food systems through semantic standards, interoperability, and ethical data engineering.
+            {heroSubtitle}
           </p>
         </div>
       </div>
@@ -142,29 +167,26 @@ const AboutUs: React.FC = () => {
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="max-w-4xl mx-auto py-8">
               <div className="prose prose-lg text-gray-600 space-y-6">
-                <p className="text-xl font-medium text-aggie-blueLight leading-relaxed">
-                Our mission is to create the foundations for global, decentralized, traceable, transparent, and trustworthy food systems.
-                </p>
-                <p>
-                We develop shared language, standards, and digital infrastructure enabling seamless communication across food system sectors--from agriculture and manufacturing to nutrition and health.
-                </p>
+                {missionBody ? (
+                  <div
+                    className="text-xl font-medium text-aggie-blueLight leading-relaxed"
+                    dangerouslySetInnerHTML={richTextHtml(missionBody)}
+                  />
+                ) : (
+                  <>
+                    <p className="text-xl font-medium text-aggie-blueLight leading-relaxed">
+                      {FALLBACK.missionIntro}
+                    </p>
+                    <p>{FALLBACK.missionBody}</p>
+                  </>
+                )}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                  <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
-                    <h4 className="font-bold text-aggie-blue mb-2">Lowering barriers to entry</h4>
-                    <p className="text-sm">Making it easier for individuals and small businesses to use digital tools, participate in markets, and succeed—without needing specialized expertise or resources.</p>
-                  </div>
-                  <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
-                    <h4 className="font-bold text-aggie-blue mb-2">Sovereignty</h4>
-                    <p className="text-sm">Ensuring ownership of food data belongs to the producers, artisans, and communities who create it.</p>
-                  </div>
-                  <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
-                    <h4 className="font-bold text-aggie-blue mb-2">Interoperability</h4>
-                    <p className="text-sm">Creating interoperable standards and infrastructure that connect fragmented food system data--improving market stability and competition while benefitting consumers with more complete information about their food.</p>
-                  </div>
-                  <div className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
-                    <h4 className="font-bold text-aggie-blue mb-2">Decentralization</h4>
-                    <p className="text-sm">Equipping local food system actors with digital tools previously available only to industrial giants.</p>
-                  </div>
+                  {coreValues.map((val, idx) => (
+                    <div key={idx} className="bg-aggie-gray p-6 rounded-xl border border-gray-100">
+                      <h4 className="font-bold text-aggie-blue mb-2">{val.title}</h4>
+                      <p className="text-sm">{val.description}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

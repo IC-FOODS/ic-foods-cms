@@ -2,6 +2,7 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, ShieldCheck, Globe } from 'lucide-react';
+import { useCmsPage, stripHtml, richTextHtml } from '../lib/useCmsPage';
 
 const OntologyBackground: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
@@ -145,6 +146,16 @@ const OntologyBackground: React.FC = () => {
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { page: cmsPage } = useCmsPage('ic-foods');
+
+  // CMS content with fallbacks
+  const heroTitle = cmsPage?.hero_title || 'Connecting the Dots of the Global Food System since 2016';
+  const heroSubtitle = cmsPage?.hero_subtitle
+    ? stripHtml(cmsPage.hero_subtitle)
+    : 'At the International Center for Food Ontology Operability Data and Semantics (IC-FOODS), we build cyberinfrastructure for the emerging Internet of Food.';
+  const ctaLabel = cmsPage?.call_to_action_label || 'Explore Our Work';
+  const introHtml = cmsPage?.intro || null;
+
   return (
     <div className="animate-in fade-in duration-700">
       {/* Hero Section with Hidden Interactive Background */}
@@ -155,17 +166,17 @@ const Home: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pointer-events-none">
           <h1 className="text-4xl font-extrabold mb-6 tracking-tight pointer-events-auto">
-            Connecting the Dots of the <span className="text-aggie-gold">Global Food System since 2016</span>
+            {heroTitle}
           </h1>
           <p className="text-xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed pointer-events-auto">
-            At the International Center for Food Ontology Operability Data and Semantics (IC-FOODS), we build cyberinfrastructure for the emerging Internet of Food.
+            {heroSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 pointer-events-auto">
             <button
               onClick={() => navigate('/research')}
               className="bg-aggie-gold text-aggie-blue px-8 py-3 rounded-md font-bold text-lg hover:bg-white transition-all shadow-lg"
             >
-              Explore Our Work
+              {ctaLabel}
             </button>
             <button 
               onClick={() => navigate('/connect')}
@@ -224,14 +235,21 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl font-bold mt-2 mb-6">What is "Food Ontology" in plain English?</h2>
-              <div className="space-y-4">
-                <p className="text-gray-600 leading-relaxed">
-                  Imagine a massive library where every book is written in a different secret code. Scientists, farmers, and doctors all have their own "codes" for food.
-                </p>
-                <p className="text-gray-600 leading-relaxed">
-                  <strong>An ontology is the master translation key.</strong> It's a structured map that tells computers: "A 'Golden Delicious' isn't just a word; it's a type of Apple, it contains Vitamin C, and it belongs to the Fruit category." By creating these standard definitions, we let different systems talk to each other for the first time.
-                </p>
-              </div>
+              {introHtml ? (
+                <div
+                  className="space-y-4 text-gray-600 leading-relaxed prose"
+                  dangerouslySetInnerHTML={richTextHtml(introHtml)}
+                />
+              ) : (
+                <div className="space-y-4">
+                  <p className="text-gray-600 leading-relaxed">
+                    Imagine a massive library where every book is written in a different secret code. Scientists, farmers, and doctors all have their own "codes" for food.
+                  </p>
+                  <p className="text-gray-600 leading-relaxed">
+                    <strong>An ontology is the master translation key.</strong> It's a structured map that tells computers: "A 'Golden Delicious' isn't just a word; it's a type of Apple, it contains Vitamin C, and it belongs to the Fruit category." By creating these standard definitions, we let different systems talk to each other for the first time.
+                  </p>
+                </div>
+              )}
             </div>
             <div className="relative">
               <div className="bg-aggie-gray p-12 rounded-3xl shadow-sm relative overflow-hidden">

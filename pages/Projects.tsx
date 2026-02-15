@@ -17,6 +17,7 @@ import {
   Globe
 } from 'lucide-react';
 import Papa from 'papaparse';
+import { useCmsPage, stripHtml } from '../lib/useCmsPage';
 
 interface Project {
   title: string;
@@ -67,6 +68,12 @@ const Projects: React.FC = () => {
   const [researchAreasLoading, setResearchAreasLoading] = useState(true);
   const [rdProjectsLoading, setRdProjectsLoading] = useState(true);
   const [rdResourcesLoading, setRdResourcesLoading] = useState(true);
+
+  const { page: cmsPage } = useCmsPage('projects');
+  const heroTitle = cmsPage?.hero_title || 'Research & Development';
+  const heroSubtitle = cmsPage?.hero_subtitle
+    ? stripHtml(cmsPage.hero_subtitle)
+    : 'IC-FOODS standardizes food data so that the entire food system\u2014from the farmer\'s field to the consumer\'s health\u2014is more transparent, efficient, and data-driven.';
 
   const tabs = [
     { id: 'guidelines', label: 'Research Areas', icon: ClipboardCheck },
@@ -200,9 +207,9 @@ const Projects: React.FC = () => {
       {/* Hero Section strictly aligned with Publications page styling */}
       <div className="ucd-gradient text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">Research & Development</h1>
+          <h1 className="text-4xl font-bold mb-4">{heroTitle}</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            IC-FOODS standardizes food data so that the entire food system—from the farmer's field to the consumer's health—is more transparent, efficient, and data-driven.
+            {heroSubtitle}
           </p>
         </div>
       </div>
