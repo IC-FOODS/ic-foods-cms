@@ -30,3 +30,17 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+
+# Next.js build output
+.next
+
+# Python
+__pycache__/
+*.pyc
+
+# iCloud / macOS artifacts
+.git [0-9]*
+*.icloud
+._*
+~$*
+Thumbs.db
