@@ -1,0 +1,203 @@
+/*
+ * IC-FOODS Wagtail 6.0 Admin Theme
+ * Aggie Blue (#022851) / Aggie Gold (#FFBF00) / Blue Light (#1b4a7a)
+ *
+ * Injected via wagtail_hooks.py → insert_global_admin_css
+ * CSS file lives in ic-foods-cms repo, volume-mounted into Django container.
+ *
+ * Wagtail 6 uses HSL-decomposed custom properties:
+ *   --w-color-primary-hue / -saturation / -lightness
+ * The composed --w-color-primary is built from those three.
+ *
+ * Aggie Blue  #022851  →  hsl(213, 95%, 16%)
+ * Blue Light  #1b4a7a  →  hsl(211, 64%, 29%)
+ * Aggie Gold  #FFBF00  →  hsl(45, 100%, 50%)
+ * Dark Navy   #031a35  →  hsl(213, 91%, 11%)
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   1. Wagtail CSS custom property overrides (HSL decomposed)
+   ═══════════════════════════════════════════════════════════ */
+:root,
+.w-theme-system,
+.w-theme-dark,
+.w-theme-light {
+  /* Primary — Aggie Blue #022851 */
+  --w-color-primary-hue: 213;
+  --w-color-primary-saturation: 95%;
+  --w-color-primary-lightness: 16%;
+  --w-color-primary: hsl(213, 95%, 16%);
+
+  /* Primary 200 — Blue Light #1b4a7a */
+  --w-color-primary-200-hue: 211;
+  --w-color-primary-200-saturation: 64%;
+  --w-color-primary-200-lightness: 29%;
+  --w-color-primary-200: hsl(211, 64%, 29%);
+
+  /* Secondary — Aggie Gold #FFBF00 */
+  --w-color-secondary-hue: 45;
+  --w-color-secondary-saturation: 100%;
+  --w-color-secondary-lightness: 50%;
+  --w-color-secondary: hsl(45, 100%, 50%);
+
+  --w-color-secondary-400: hsl(45, 100%, 42%);
+  --w-color-secondary-600: hsl(45, 100%, 35%);
+  --w-color-secondary-100: hsl(45, 100%, 75%);
+  --w-color-secondary-75: hsl(45, 100%, 85%);
+  --w-color-secondary-50: hsl(45, 100%, 93%);
+
+  /* Surface colors */
+  --w-color-surface-header: #022851;
+  --w-color-surface-menus: #031a35;
+  --w-color-surface-menu-item-active: #1b4a7a;
+
+  /* Text in menus */
+  --w-color-text-label-menus-default: #c8d6e5;
+  --w-color-text-label-menus-active: #FFBF00;
+
+  /* Focus ring */
+  --w-color-focus: #FFBF00;
+
+  /* Icon colors in sidebar */
+  --w-color-icon-primary: #7a9cc6;
+  --w-color-icon-primary-hover: #FFBF00;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2. Login page
+   ═══════════════════════════════════════════════════════════ */
+body.login {
+  background: linear-gradient(135deg, #022851 0%, #1b4a7a 100%) !important;
+}
+
+body.login .content-wrapper {
+  background: transparent !important;
+}
+
+body.login h1 {
+  color: #ffffff !important;
+}
+
+body.login .login-logo {
+  margin-bottom: 1.5rem;
+}
+
+/* Login submit button — gold with blue text */
+body.login .button,
+body.login button[type="submit"] {
+  background-color: #FFBF00 !important;
+  color: #022851 !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+
+body.login .button:hover,
+body.login button[type="submit"]:hover {
+  background-color: #ffffff !important;
+  color: #022851 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3. Sidebar overrides (React-rendered in Wagtail 6)
+   ═══════════════════════════════════════════════════════════ */
+[data-side-panel="menu"],
+[data-side-panel] {
+  background-color: #031a35 !important;
+}
+
+/* Active menu item highlight */
+[data-side-panel] [aria-current="page"],
+[data-side-panel] .sidebar-menu-item--active,
+[data-side-panel] .w-sidebar-menu-item--active {
+  background-color: #1b4a7a !important;
+  color: #FFBF00 !important;
+}
+
+/* Hover on sidebar items */
+[data-side-panel] a:hover,
+[data-side-panel] button:hover {
+  background-color: rgba(27, 74, 122, 0.5) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4. Header bar
+   ═══════════════════════════════════════════════════════════ */
+header[role="banner"],
+.w-slim-header {
+  background-color: #022851 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5. Buttons
+   ═══════════════════════════════════════════════════════════ */
+.button.bicolor,
+a.button.bicolor,
+.button-primary,
+button.button.yes {
+  background-color: #022851 !important;
+  border-color: #022851 !important;
+}
+
+.button.bicolor:hover,
+a.button.bicolor:hover,
+.button-primary:hover,
+button.button.yes:hover {
+  background-color: #1b4a7a !important;
+  border-color: #1b4a7a !important;
+}
+
+/* Secondary buttons */
+.button-secondary,
+.button.button-secondary {
+  color: #022851 !important;
+  border-color: #022851 !important;
+}
+
+.button-secondary:hover,
+.button.button-secondary:hover {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   6. Tabs, breadcrumbs, status tags
+   ═══════════════════════════════════════════════════════════ */
+.tab-nav a.active,
+[role="tab"][aria-selected="true"] {
+  border-bottom-color: #FFBF00 !important;
+  color: #022851 !important;
+}
+
+.w-breadcrumbs a {
+  color: #1b4a7a !important;
+}
+
+.w-breadcrumbs a:hover {
+  color: #022851 !important;
+}
+
+.w-status--primary,
+.status-tag.primary {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   7. Progress bars and loading indicators
+   ═══════════════════════════════════════════════════════════ */
+.progress .bar,
+[role="progressbar"] > * {
+  background-color: #FFBF00 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   8. Focus and selection
+   ═══════════════════════════════════════════════════════════ */
+*:focus-visible {
+  outline-color: #FFBF00 !important;
+}
+
+::selection {
+  background-color: rgba(255, 191, 0, 0.3);
+  color: #022851;
+}

@@ -13,7 +13,8 @@ interface AuthContextType {
   accessToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: () => void;
+  googleLogin: () => void;
+  localLogin: (username: string, password: string) => Promise<string | null>;
   logout: () => void;
   setAccessToken: (token: string) => void;
 }
@@ -23,7 +24,8 @@ const AuthContext = createContext<AuthContextType>({
   accessToken: null,
   isAuthenticated: false,
   isLoading: true,
-  login: () => {},
+  googleLogin: () => {},
+  localLogin: async () => null,
   logout: () => {},
   setAccessToken: () => {},
 });
@@ -107,10 +109,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [accessToken, fetchUser]);
 
-  const login = useCallback(() => {
+  const googleLogin = useCallback(() => {
     const djangoBase = API_BASE || window.location.origin;
     window.location.href = `${djangoBase}/accounts/google/login/?process=login`;
   }, []);
+
+  const localLogin = useCallback(async (username: string, password: string): Promise<string | null> => {
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/token/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+      if (res.ok) {
+        const { access } = await res.json();
+        setAccessToken(access);
+        return null;
+      }
+      const data = await res.json().catch(() => ({}));
+      return data.detail || 'Invalid credentials';
+    } catch {
+      return 'Server unreachable';
+    }
+  }, [setAccessToken]);
 
   const logout = useCallback(async () => {
     if (accessToken) {
@@ -134,7 +155,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         accessToken,
         isAuthenticated: !!user,
         isLoading,
-        login,
+        googleLogin,
+        localLogin,
         logout,
         setAccessToken,
       }}

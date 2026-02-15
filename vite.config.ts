@@ -14,6 +14,20 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
+        proxy: {
+          '/api': {
+            target: env.VITE_API_BASE_URL || 'http://django:8000',
+            changeOrigin: true,
+          },
+          '/accounts': {
+            target: env.VITE_API_BASE_URL || 'http://django:8000',
+            changeOrigin: true,
+          },
+          '/admin': {
+            target: env.VITE_API_BASE_URL || 'http://django:8000',
+            changeOrigin: true,
+          },
+        },
       },
       plugins: [react()],
       define: {
