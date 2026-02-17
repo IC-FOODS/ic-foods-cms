@@ -2,6 +2,18 @@
 
 > Last updated: 2026-02-09
 
+## Runtime Contract Authority (Important)
+
+This repository is not the runtime contract authority for embed behavior.
+Canonical runtime authority is in `knowbrow`:
+1. `backend/django/graphs/models.py` (`VisualizationEmbedPage`)
+2. `backend/django/graphs/templates/graphs/visualization_embed_page.html`
+3. `backend/django/graphs/tests/test_visualization_embed_page.py`
+4. `docs/PLUGIN_CONTRACT.md`
+5. `docs/plugin-contract/EMBED_EVENT_PROTOCOL.md`
+
+All embed URL params, postMessage payloads, token semantics, and event protocol rules must align to those KnowBrow files first. This document is architectural guidance only.
+
 ## Role in the Ecosystem
 
 IC-FOODS CMS is a **Wagtail site skin** that plugs into the [KnowBrow](https://github.com/UKnowGrow/knowbrow) platform. It provides IC-FOODS-specific pages, templates, theming, and content while inheriting platform primitives (data sources, permissions, adapters, graph configurations) from KnowBrow's Django app.
@@ -201,4 +213,7 @@ python manage.py runserver
 ></iframe>
 ```
 
-See [KnowBrow ARCHITECTURE.md](https://github.com/UKnowGrow/knowbrow/blob/main/PLANS/ARCHITECTURE.md) for the full iframe integration contract.
+Runtime contract source of truth:
+1. [KnowBrow PLUGIN_CONTRACT.md](https://github.com/UKnowGrow/knowbrow/blob/main/docs/PLUGIN_CONTRACT.md)
+2. [KnowBrow EMBED_EVENT_PROTOCOL.md](https://github.com/UKnowGrow/knowbrow/blob/main/docs/plugin-contract/EMBED_EVENT_PROTOCOL.md)
+3. [KnowBrow VisualizationEmbedPage model/template/tests](https://github.com/UKnowGrow/knowbrow/tree/main/backend/django/graphs)
