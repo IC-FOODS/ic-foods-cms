@@ -1,7 +1,7 @@
 
 
 
-# IC-FOODS Website
+# IC-FOODS CMS
 
 International Center for Food Ontology Operability Data and Semantics website built with React, TypeScript, and Vite.
 
