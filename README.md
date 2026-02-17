@@ -57,13 +57,19 @@ This repository is configured for automatic deployment to GitHub Pages using Git
 
 ### Setup Instructions
 
+This workflow auto-detects `VITE_BASE_PATH`:
+- repository named `*.github.io` -> `/`
+- all other repos -> `/<repo-name>/`
+- optional override via repository variable `VITE_BASE_PATH`
+
+
 1. **Enable GitHub Pages in your repository:**
    - Go to your repository settings
    - Navigate to "Pages" in the left sidebar
    - Under "Source", select "GitHub Actions"
 
 2. **Push to main/master branch:**
-   - The GitHub Actions workflow (`.github/workflows/deploy.yml`) will automatically:
+   - The GitHub Actions workflow (`.github/workflows/pages.yml`) will automatically:
      - Build the project
      - Deploy to GitHub Pages
    - The workflow runs on every push to `main` or `master` branch
@@ -73,7 +79,7 @@ This repository is configured for automatic deployment to GitHub Pages using Git
    - Add a repository secret or environment variable in GitHub Actions:
      - Name: `VITE_BASE_PATH`
      - Value: `/your-repo-name/` (with leading and trailing slashes)
-   - Or update `.github/workflows/deploy.yml` to set it in the build step
+   - Or update `.github/workflows/pages.yml` to set it in the build step
    - If your repo IS named `username.github.io`, no configuration needed (uses `/`)
 
 4. **Access your site:**

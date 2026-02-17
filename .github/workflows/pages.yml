@@ -22,31 +22,38 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-      
+          node-version: "20"
+          cache: "npm"
+
+      - name: Resolve Vite base path
+        run: |
+          if [ -n "${{ vars.VITE_BASE_PATH }}" ]; then
+            BASE_PATH="${{ vars.VITE_BASE_PATH }}"
+          elif [[ "${GITHUB_REPOSITORY#*/}" == *.github.io ]]; then
+            BASE_PATH="/"
+          else
+            BASE_PATH="/${GITHUB_REPOSITORY#*/}/"
+          fi
+          echo "VITE_BASE_PATH=${BASE_PATH}" >> "$GITHUB_ENV"
+          echo "Using VITE_BASE_PATH=${BASE_PATH}"
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build
         run: npm run build
-        env:
-          # Base path for GitHub Pages deployment
-          # Using '/' for custom domain (ic-foods.org)
-          # If deploying to subdirectory, use: VITE_BASE_PATH: /repo-name/
-          VITE_BASE_PATH: /
-      
+
       - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
+        uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ./dist
 
   deploy:
     environment:
