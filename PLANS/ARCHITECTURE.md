@@ -14,6 +14,22 @@ Canonical runtime authority is in `knowbrow`:
 
 All embed URL params, postMessage payloads, token semantics, and event protocol rules must align to those KnowBrow files first. This document is architectural guidance only.
 
+## Test Execution Policy (Mandatory)
+
+All CMS validation must run in the CMS container context. Do not treat host-local Node or Python runs as authoritative.
+
+Required commands:
+1. Frontend component/integration tests:
+   `docker compose -f docker-compose.cms.yml run --rm cms-test`
+2. CMS app local runtime:
+   `docker compose -f docker-compose.cms.yml up cms-dev`
+3. Wagtail/Django checks for KnowBrow-integrated CMS:
+   `docker compose -f ../knowbrow/docker-compose.yml exec -T django python manage.py check`
+4. Wagtail/Django tests for KnowBrow-integrated CMS:
+   `docker compose -f ../knowbrow/docker-compose.yml exec -T django python manage.py test --keepdb`
+
+Reason: containerized execution prevents environment drift and avoids false green results from host-specific toolchains.
+
 ## Role in the Ecosystem
 
 IC-FOODS CMS is a **Wagtail site skin** that plugs into the [KnowBrow](https://github.com/UKnowGrow/knowbrow) platform. It provides IC-FOODS-specific pages, templates, theming, and content while inheriting platform primitives (data sources, permissions, adapters, graph configurations) from KnowBrow's Django app.

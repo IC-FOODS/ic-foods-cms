@@ -28,6 +28,21 @@ International Center for Food Ontology Operability Data and Semantics website bu
 
 3. Open your browser at `http://localhost:3000`
 
+## Testing (Containerized Required)
+
+CMS validation must run in the CMS container, not directly on host.
+
+1. Run CMS tests:
+   ```bash
+   docker compose -f docker-compose.cms.yml run --rm cms-test
+   ```
+2. Run CMS dev server in container:
+   ```bash
+   docker compose -f docker-compose.cms.yml up cms-dev
+   ```
+
+This keeps agent/dev behavior consistent with runtime dependencies and avoids host-environment drift.
+
 ## Building for Production
 
 ```bash
