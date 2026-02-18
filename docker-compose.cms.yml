@@ -20,3 +20,12 @@ services:
       - ./:/app
       - /app/node_modules
     command: npm run test:ci
+
+  cms-build:
+    build:
+      context: .
+      target: test
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: npm run build

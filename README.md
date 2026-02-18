@@ -26,11 +26,14 @@ International Center for Food Ontology Operability Data and Semantics website bu
    npm run dev
    ```
 
-3. Open your browser at `http://localhost:3000`
+3. Open your browser at `http://localhost:3002`
 
-## Testing (Containerized Required)
+## Testing Policy (Container-Only)
 
-CMS validation must run in the CMS container, not directly on host.
+All validation and test execution for this repo must run in containers.
+Do not run test/build verification directly on host machines.
+
+Required commands:
 
 1. Run CMS tests:
    ```bash
@@ -39,6 +42,10 @@ CMS validation must run in the CMS container, not directly on host.
 2. Run CMS dev server in container:
    ```bash
    docker compose -f docker-compose.cms.yml up cms-dev
+   ```
+3. Run production build check in container:
+   ```bash
+   docker compose -f docker-compose.cms.yml run --rm cms-build
    ```
 
 This keeps agent/dev behavior consistent with runtime dependencies and avoids host-environment drift.
