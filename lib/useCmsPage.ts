@@ -158,3 +158,81 @@ export function stripHtml(html: string): string {
 export function richTextHtml(html: string) {
   return { __html: html || '' };
 }
+
+/**
+ * Fetch snippets from the CMS API (Research Areas, Resources, Publications, etc.)
+ */
+export interface CmsSnippet {
+  id: number;
+  name?: string;
+  title?: string;
+  slug: string;
+  [key: string]: any;
+}
+
+interface UseSnippetsResult {
+  items: CmsSnippet[];
+  loading: boolean;
+  error: string | null;
+}
+
+// Cache for snippets
+const snippetCache: Record<string, { data: CmsSnippet[]; ts: number }> = {};
+
+export function useCmsSnippets(snippetType: 'research_areas' | 'resources' | 'publications' | 'organizations' | 'individuals'): UseSnippetsResult {
+  const [items, setItems] = useState<CmsSnippet[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const cacheKey = snippetType;
+    const cached = snippetCache[cacheKey];
+    if (cached && Date.now() - cached.ts < CACHE_TTL_MS) {
+      setItems(cached.data);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
+    setLoading(true);
+    const doFetch = async () => {
+      try {
+        // Map snippet type to API endpoint
+        const endpointMap: Record<string, string> = {
+          research_areas: 'researcharea',
+          resources: 'resource',
+          publications: 'publication',
+          organizations: 'organization',
+          individuals: 'individual',
+        };
+        const endpoint = endpointMap[snippetType] || snippetType;
+        
+        const res = await fetch(
+          `${API_BASE}/api/cms/snippets/graphs.${endpoint}/?format=json`
+        );
+        if (!res.ok) throw new Error(`CMS API error: ${res.status}`);
+        const data = await res.json();
+        const fetchedItems = data.items || [];
+        snippetCache[cacheKey] = { data: fetchedItems, ts: Date.now() };
+        setItems(fetchedItems);
+      } catch (err: any) {
+        setError(err.message);
+        setItems([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    doFetch();
+  }, [snippetType]);
+
+  return { items, loading, error };
+}
+
+/**
+ * Fetch R&D Projects (child pages of Research Index Page)
+ */
+export function useRdProjects() {
+  const { page: researchPage } = useCmsPage('projects');
+  const parentId = researchPage?.id || null;
+  return useCmsChildren(parentId);
+}

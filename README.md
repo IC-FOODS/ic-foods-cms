@@ -27,6 +27,9 @@ International Center for Food Ontology Operability Data and Semantics website bu
    ```
 
 3. Open your browser at `http://localhost:3002`
+4. Ensure KnowBrow is running (API/auth backend):
+   - Local dev uses Vite proxy with `VITE_API_PROXY_TARGET` (default: `https://host.docker.internal`)
+   - Browser requests stay same-origin (`/api/...`) and are forwarded by Vite to KnowBrow
 
 ## Testing Policy (Container-Only)
 

@@ -41,13 +41,25 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { name: 'R&D', path: '/research' },
-    { name: 'Publications', path: '/publications' },
+    { name: 'Publications', path: '/research?tab=publications' },
     { name: 'Partners', path: '/partners' },
     { name: 'About', path: '/about' },
     { name: 'Conferences', path: '/conferences' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    if (path.includes('?')) {
+      const [pathname, search] = path.split('?');
+      return location.pathname === pathname && location.search === `?${search}`;
+    }
+    if (path === '/research') {
+      return (
+        location.pathname === '/research'
+        && location.search !== '?tab=publications'
+      );
+    }
+    return location.pathname === path;
+  };
 
   return (
     <nav className="bg-aggie-blue sticky top-0 z-50 shadow-md">

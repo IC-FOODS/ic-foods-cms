@@ -12,20 +12,27 @@ export default defineConfig(({ mode }) => {
     return {
       base,
       server: {
-        port: 3000,
+        port: 3002,
         host: '0.0.0.0',
+        cors: true,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
         proxy: {
           '/api': {
-            target: env.VITE_API_BASE_URL || 'http://django:8000',
+            target: env.VITE_API_PROXY_TARGET || 'https://host.docker.internal',
             changeOrigin: true,
+            secure: false,
           },
           '/accounts': {
-            target: env.VITE_API_BASE_URL || 'http://django:8000',
+            target: env.VITE_API_PROXY_TARGET || 'https://host.docker.internal',
             changeOrigin: true,
+            secure: false,
           },
           '/admin': {
-            target: env.VITE_API_BASE_URL || 'http://django:8000',
+            target: env.VITE_API_PROXY_TARGET || 'https://host.docker.internal',
             changeOrigin: true,
+            secure: false,
           },
         },
       },
@@ -38,6 +45,6 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
-      }
+      },
     };
 });
