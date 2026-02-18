@@ -58,6 +58,21 @@
         scrollbar-width: none;
       }
     </style>
+    <script>
+      // GitHub Pages SPA fallback decode:
+      // 404.html redirects to /?/path&query, then this restores the real URL.
+      (function restoreSpaPath(loc) {
+        if (!loc.search || loc.search.length < 2 || loc.search[1] !== '/') return;
+        var decoded = loc.search
+          .slice(1)
+          .split('&')
+          .map(function (part) {
+            return part.replace(/~and~/g, '&');
+          })
+          .join('?');
+        window.history.replaceState(null, '', decoded + loc.hash);
+      })(window.location);
+    </script>
 <script type="importmap">
 {
   "imports": {
