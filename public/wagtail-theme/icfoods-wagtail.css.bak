@@ -1,0 +1,1347 @@
+/*
+ * IC-FOODS Wagtail 6.0 Admin Theme
+ * Matching IC-FOODS Website Design System
+ * 
+ * Color Palette (from ic-foods-cms Tailwind config):
+ * - Aggie Blue:  #022851 (primary dark)
+ * - Aggie Gold:  #FFBF00 (accent/CTA)
+ * - Blue Light:  #1b4a7a (secondary)
+ * - White:       #ffffff (backgrounds)
+ * - Gray Light:  #f8fafc (subtle backgrounds)
+ * - Gray:        #e5e7eb (borders)
+ * - Text Dark:   #1a1a1a (body text)
+ *
+ * VISIBILITY RULES:
+ * - Dark backgrounds (#022851, #1b4a7a) → White or Gold text
+ * - Light backgrounds (#ffffff, #f8fafc) → Dark blue or black text
+ * - Never: Gold on white, Dark blue on dark blue
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   1. CSS VARIABLES - Override Wagtail defaults
+   ═══════════════════════════════════════════════════════════ */
+:root,
+.w-theme-system,
+.w-theme-light,
+.w-theme-dark {
+  /* Primary — Aggie Blue */
+  --w-color-primary: #022851;
+  --w-color-primary-200: #1b4a7a;
+  
+  /* Secondary — Aggie Gold */
+  --w-color-secondary: #FFBF00;
+  
+  /* Surfaces */
+  --w-color-surface-page: #ffffff;
+  --w-color-surface-field: #ffffff;
+  --w-color-surface-header: #022851;
+  --w-color-surface-menus: #022851;
+  
+  /* Text */
+  --w-color-text-context: #1a1a1a;
+  --w-color-text-label: #022851;
+  
+  /* Focus */
+  --w-color-focus: #FFBF00;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2. SIDEBAR - Dark Aggie Blue with proper contrast
+   ═══════════════════════════════════════════════════════════ */
+.w-sidebar,
+.sidebar,
+nav.sidebar,
+[data-side-panel="menu"] {
+  background-color: #022851 !important;
+}
+
+/* Sidebar menu items - light text on dark */
+.w-sidebar a,
+.w-sidebar button,
+.w-sidebar span,
+.sidebar-menu-item,
+.w-sidebar__menu-item {
+  color: #ffffff !important;
+}
+
+.w-sidebar a:hover,
+.w-sidebar button:hover,
+.sidebar-menu-item:hover,
+.w-sidebar__menu-item:hover {
+  background-color: #1b4a7a !important;
+  color: #FFBF00 !important;
+}
+
+/* Active menu item - GOLD text to show current section */
+.sidebar-menu-item.is-active,
+.w-sidebar__menu-item--active,
+.w-sidebar a[aria-current="page"],
+.w-sidebar [aria-expanded="true"],
+.w-sidebar .is-active,
+.w-sidebar .w-active {
+  background-color: #1b4a7a !important;
+  color: #FFBF00 !important;
+}
+
+.sidebar-menu-item.is-active span,
+.w-sidebar__menu-item--active span,
+.w-sidebar a[aria-current="page"] span,
+.w-sidebar [aria-expanded="true"] > span,
+.w-sidebar .is-active span {
+  color: #FFBF00 !important;
+}
+
+.sidebar-menu-item.is-active svg,
+.w-sidebar__menu-item--active svg,
+.w-sidebar a[aria-current="page"] svg,
+.w-sidebar [aria-expanded="true"] svg {
+  color: #FFBF00 !important;
+}
+
+/* Sidebar icons - visible on dark */
+.w-sidebar svg,
+.w-sidebar .w-icon,
+.sidebar-menu-item__icon {
+  color: #c8d6e5 !important;
+}
+
+.w-sidebar a:hover svg,
+.w-sidebar button:hover svg {
+  color: #FFBF00 !important;
+}
+
+/* Sidebar search - styled input on dark background */
+.w-sidebar input,
+.w-sidebar__search input,
+#menu-search-q {
+  background-color: #1b4a7a !important;
+  color: #ffffff !important;
+  border: 2px solid #3d6a9a !important;
+  border-radius: 6px !important;
+  padding: 0.5rem 0.75rem 0.5rem 2.5rem !important;
+}
+
+.w-sidebar input::placeholder {
+  color: #a0b4c8 !important;
+}
+
+.w-sidebar input:focus {
+  border-color: #FFBF00 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(255, 191, 0, 0.3) !important;
+}
+
+/* Search icon in sidebar */
+.w-sidebar__search-icon,
+.w-sidebar [data-icon="search"] {
+  color: #a0b4c8 !important;
+}
+
+/* Logo area - larger logo */
+.w-sidebar__branding,
+.sidebar-custom-branding {
+  padding: 1rem !important;
+  min-height: 100px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.w-sidebar__branding img,
+.sidebar-custom-branding img {
+  max-width: 80px !important;
+  max-height: 80px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Sidebar search - fix positioning */
+.w-sidebar__search,
+.sidebar-search-container {
+  padding: 0.5rem 0.75rem !important;
+  margin: 0 !important;
+}
+
+.w-sidebar__search-form {
+  position: relative !important;
+  width: 100% !important;
+}
+
+.w-sidebar__search-input,
+.w-sidebar input[type="text"],
+.w-sidebar input[type="search"],
+#menu-search-q {
+  width: 100% !important;
+  background-color: #1b4a7a !important;
+  color: #ffffff !important;
+  border: 1px solid #3d6a9a !important;
+  border-radius: 4px !important;
+  padding: 0.4rem 0.5rem 0.4rem 2rem !important;
+  font-size: 0.875rem !important;
+  box-sizing: border-box !important;
+}
+
+.w-sidebar__search-icon {
+  position: absolute !important;
+  left: 0.5rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #a0b4c8 !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3. TOP HEADER BAR - Dark with proper contrast
+   ═══════════════════════════════════════════════════════════ */
+.w-slim-header,
+header.w-slim-header,
+.w-header--slim {
+  background-color: #022851 !important;
+}
+
+/* Breadcrumbs - white/gold on dark */
+.w-breadcrumbs,
+.w-slim-header .w-breadcrumbs {
+  background-color: transparent !important;
+}
+
+.w-breadcrumbs a,
+.w-breadcrumbs__link {
+  color: #c8d6e5 !important;
+}
+
+.w-breadcrumbs a:hover,
+.w-breadcrumbs__link:hover {
+  color: #FFBF00 !important;
+}
+
+.w-breadcrumbs__item--active,
+.w-breadcrumbs span:not(a) {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* Header search box */
+.w-slim-header input[type="search"],
+.w-slim-header .w-field__input input,
+header input[type="search"] {
+  background-color: #1b4a7a !important;
+  color: #ffffff !important;
+  border: 2px solid #3d6a9a !important;
+  border-radius: 6px !important;
+}
+
+.w-slim-header input::placeholder,
+header input::placeholder {
+  color: #a0b4c8 !important;
+}
+
+.w-slim-header input:focus,
+header input:focus {
+  border-color: #FFBF00 !important;
+  box-shadow: 0 0 0 2px rgba(255, 191, 0, 0.3) !important;
+}
+
+/* Header icons and buttons */
+.w-slim-header button,
+.w-slim-header a,
+.w-slim-header svg,
+.w-header__action {
+  color: #ffffff !important;
+}
+
+.w-slim-header button:hover,
+.w-slim-header a:hover {
+  color: #FFBF00 !important;
+  background-color: #1b4a7a !important;
+}
+
+/* LIVE button in header */
+.w-slim-header .w-status,
+.w-slim-header [data-w-status] {
+  background-color: #28a745 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  padding: 0.25rem 0.75rem !important;
+  border-radius: 4px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4. MAIN CONTENT AREA - White/light backgrounds
+   ═══════════════════════════════════════════════════════════ */
+.w-main,
+main,
+.content,
+.content-wrapper {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+/* Page header */
+.w-header,
+header.w-header:not(.w-slim-header) {
+  background-color: #f8fafc !important;
+  border-bottom: 2px solid #022851 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5. PAGE LISTING TABLE - Clear visibility
+   ═══════════════════════════════════════════════════════════ */
+.listing,
+table.listing {
+  background-color: #ffffff !important;
+}
+
+/* Table header */
+.listing thead,
+.listing th {
+  background-color: #f8fafc !important;
+  color: #022851 !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #022851 !important;
+}
+
+/* Table rows */
+.listing tbody tr {
+  background-color: #ffffff !important;
+}
+
+.listing tbody tr:hover {
+  background-color: #f8fafc !important;
+}
+
+.listing td {
+  color: #1a1a1a !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Page title links - dark blue on white */
+.listing .title a,
+.listing h2 a,
+.listing td a {
+  color: #022851 !important;
+  font-weight: 600 !important;
+}
+
+.listing .title a:hover,
+.listing h2 a:hover,
+.listing td a:hover {
+  color: #1b4a7a !important;
+  text-decoration: underline !important;
+}
+
+/* View Live (React) links - BLUE not yellow for contrast */
+a[href*="localhost:3002"],
+.listing a[target="_blank"] {
+  color: #1b4a7a !important;
+  font-weight: 500 !important;
+}
+
+a[href*="localhost:3002"]:hover {
+  color: #022851 !important;
+  text-decoration: underline !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   6. STATUS BADGES - High contrast
+   ═══════════════════════════════════════════════════════════ */
+.w-status,
+.status-tag {
+  padding: 0.25rem 0.75rem !important;
+  border-radius: 4px !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* LIVE status - Green */
+.w-status--primary,
+.w-status--live,
+.status-tag.primary,
+.status-tag[data-status="live"] {
+  background-color: #28a745 !important;
+  color: #ffffff !important;
+}
+
+/* DRAFT status - Gold with dark text */
+.w-status--secondary,
+.w-status--draft,
+.status-tag.secondary,
+.status-tag[data-status="draft"] {
+  background-color: #FFBF00 !important;
+  color: #022851 !important;
+}
+
+/* LIVE + DRAFT combined */
+.status-tag[data-status*="live"][data-status*="draft"] {
+  background: linear-gradient(90deg, #28a745 50%, #FFBF00 50%) !important;
+  color: #ffffff !important;
+}
+
+/* Updated timestamps - Light blue background */
+.listing .w-status--info,
+.listing time,
+.listing .updated {
+  background-color: #e8f4fd !important;
+  color: #022851 !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   7. THREE-DOT MENU BUTTONS - Visible on white
+   ═══════════════════════════════════════════════════════════ */
+.w-dropdown__toggle,
+button[data-dropdown-toggle],
+.listing button[aria-haspopup],
+button[aria-label*="More options"],
+.w-action-menu__toggle {
+  background-color: #f8fafc !important;
+  color: #022851 !important;
+  border: 2px solid #c8d6e5 !important;
+  border-radius: 6px !important;
+  padding: 0.5rem !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+}
+
+.w-dropdown__toggle:hover,
+button[data-dropdown-toggle]:hover,
+.listing button[aria-haspopup]:hover {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+  border-color: #022851 !important;
+}
+
+.w-dropdown__toggle svg,
+button[data-dropdown-toggle] svg {
+  color: inherit !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   8. DROPDOWN MENUS - White with shadows
+   ═══════════════════════════════════════════════════════════ */
+.w-dropdown__content,
+.w-action-menu__content,
+[data-dropdown-content],
+.tippy-box,
+.tippy-content {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  padding: 0.5rem 0 !important;
+}
+
+.w-dropdown__item,
+.w-action-menu__item,
+[data-dropdown-content] a,
+[data-dropdown-content] button {
+  color: #1a1a1a !important;
+  padding: 0.75rem 1rem !important;
+  display: block !important;
+  background-color: transparent !important;
+}
+
+.w-dropdown__item:hover,
+.w-action-menu__item:hover,
+[data-dropdown-content] a:hover,
+[data-dropdown-content] button:hover {
+  background-color: #f8fafc !important;
+  color: #022851 !important;
+}
+
+/* Tippy arrow */
+.tippy-arrow {
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   9. TOOLTIPS - Dark with white text
+   ═══════════════════════════════════════════════════════════ */
+[role="tooltip"],
+.w-tooltip,
+.tooltip {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+  font-size: 0.875rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   10. TABS - Clear active state
+   ═══════════════════════════════════════════════════════════ */
+.w-tabs__list,
+[role="tablist"] {
+  background-color: #f8fafc !important;
+  border-bottom: 2px solid #e5e7eb !important;
+}
+
+.w-tabs__tab,
+[role="tab"] {
+  background-color: transparent !important;
+  color: #1b4a7a !important;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500 !important;
+}
+
+.w-tabs__tab:hover,
+[role="tab"]:hover {
+  color: #022851 !important;
+  background-color: #ffffff !important;
+}
+
+.w-tabs__tab[aria-selected="true"],
+[role="tab"][aria-selected="true"] {
+  color: #022851 !important;
+  background-color: #ffffff !important;
+  border-bottom-color: #FFBF00 !important;
+  font-weight: 600 !important;
+}
+
+.w-tabs__panel,
+[role="tabpanel"] {
+  background-color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   11. FORM PANELS - White with blue accents
+   ═══════════════════════════════════════════════════════════ */
+.w-panel {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-left: 4px solid #022851 !important;
+  border-radius: 0 8px 8px 0 !important;
+  margin-bottom: 1rem !important;
+}
+
+.w-panel:hover {
+  border-left-color: #FFBF00 !important;
+}
+
+.w-panel__heading {
+  background-color: #f8fafc !important;
+  color: #022851 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.w-panel__heading-text {
+  color: #022851 !important;
+  font-weight: 600 !important;
+}
+
+.w-panel__content {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   12. FORM FIELDS - White inputs with dark text
+   ═══════════════════════════════════════════════════════════ */
+.w-field__label {
+  color: #022851 !important;
+  font-weight: 600 !important;
+}
+
+.w-field__help {
+  color: #1b4a7a !important;
+  background-color: #f8fafc !important;
+  padding: 0.5rem !important;
+  border-radius: 4px !important;
+  font-style: italic !important;
+}
+
+/* All inputs - WHITE background, DARK text */
+input:not([type="submit"]):not([type="button"]),
+textarea,
+select {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 2px solid #c8d6e5 !important;
+  border-radius: 6px !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #FFBF00 !important;
+  box-shadow: 0 0 0 3px rgba(255, 191, 0, 0.2) !important;
+  outline: none !important;
+}
+
+/* Title field */
+[data-contentpath="title"] input {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  padding: 1rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   13. RICH TEXT EDITOR (Draftail)
+   ═══════════════════════════════════════════════════════════ */
+.Draftail-Editor {
+  background-color: #ffffff !important;
+  border: 2px solid #c8d6e5 !important;
+  border-radius: 8px !important;
+}
+
+.Draftail-Editor:focus-within {
+  border-color: #FFBF00 !important;
+}
+
+.Draftail-Toolbar {
+  background-color: #022851 !important;
+  border-radius: 6px 6px 0 0 !important;
+}
+
+.Draftail-ToolbarButton {
+  color: #ffffff !important;
+}
+
+.Draftail-ToolbarButton:hover,
+.Draftail-ToolbarButton--active {
+  background-color: #FFBF00 !important;
+  color: #022851 !important;
+}
+
+.public-DraftEditor-content,
+.DraftEditor-root {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   14. STREAMFIELD BLOCKS
+   ═══════════════════════════════════════════════════════════ */
+.c-sf-block {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-left: 4px solid #1b4a7a !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.c-sf-block:hover {
+  border-left-color: #FFBF00 !important;
+}
+
+.c-sf-block__header {
+  background-color: #f8fafc !important;
+  color: #022851 !important;
+}
+
+.c-sf-block__header-title {
+  color: #022851 !important;
+  font-weight: 600 !important;
+}
+
+.c-sf-block__content {
+  background-color: #ffffff !important;
+}
+
+/* Add block button */
+.c-sf-add-button {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+}
+
+.c-sf-add-button:hover {
+  background-color: #FFBF00 !important;
+  color: #022851 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   15. BUTTONS - Proper contrast
+   ═══════════════════════════════════════════════════════════ */
+/* Primary buttons - Blue with white text */
+button[type="submit"],
+input[type="submit"],
+.button-primary,
+.w-button--primary {
+  background: linear-gradient(135deg, #022851 0%, #1b4a7a 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+button[type="submit"]:hover,
+.button-primary:hover,
+.w-button--primary:hover {
+  background: linear-gradient(135deg, #1b4a7a 0%, #022851 100%) !important;
+  box-shadow: 0 4px 12px rgba(2, 40, 81, 0.3) !important;
+}
+
+/* Secondary buttons - White with blue border */
+.button-secondary,
+.w-button--secondary,
+.button:not(.button-primary):not(.button-danger) {
+  background-color: #ffffff !important;
+  color: #022851 !important;
+  border: 2px solid #022851 !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+.button-secondary:hover,
+.w-button--secondary:hover {
+  background-color: #f8fafc !important;
+}
+
+/* Danger buttons - Red */
+.button-danger,
+.w-button--danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   16. MESSAGES AND ALERTS
+   ═══════════════════════════════════════════════════════════ */
+.w-message,
+.messages li {
+  padding: 1rem !important;
+  border-radius: 8px !important;
+  margin-bottom: 1rem !important;
+}
+
+.w-message--success,
+.success {
+  background-color: #d4edda !important;
+  border: 1px solid #28a745 !important;
+  color: #155724 !important;
+}
+
+.w-message--error,
+.error {
+  background-color: #f8d7da !important;
+  border: 1px solid #dc3545 !important;
+  color: #721c24 !important;
+}
+
+.w-message--warning,
+.warning {
+  background-color: #fff3cd !important;
+  border: 1px solid #ffc107 !important;
+  color: #856404 !important;
+}
+
+.w-message--info,
+.info {
+  background-color: #e8f4fd !important;
+  border: 1px solid #1b4a7a !important;
+  color: #022851 !important;
+}
+
+/* Edit button in messages */
+.w-message .button,
+.messages .button {
+  background-color: #ffffff !important;
+  color: #022851 !important;
+  border: 2px solid currentColor !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   17. INFO BOXES (Root page notice)
+   ═══════════════════════════════════════════════════════════ */
+.w-panel--info,
+.help-block,
+[role="note"] {
+  background-color: #e8f4fd !important;
+  border: 1px solid #1b4a7a !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  color: #022851 !important;
+}
+
+.w-panel--info a,
+.help-block a {
+  color: #1b4a7a !important;
+  text-decoration: underline !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   18. SIDE PANELS / DRAWERS
+   ═══════════════════════════════════════════════════════════ */
+/* Overlay - semi-transparent */
+.w-dialog__overlay,
+[data-side-panel-overlay] {
+  background-color: rgba(2, 40, 81, 0.6) !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+/* Panel itself */
+.w-dialog,
+.w-side-panel,
+[data-side-panel]:not([data-side-panel="menu"]) {
+  background-color: #ffffff !important;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+.w-dialog__header,
+.w-side-panel__header {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+}
+
+.w-dialog__title,
+.w-side-panel__title {
+  color: #ffffff !important;
+}
+
+.w-dialog__close,
+.w-side-panel__close {
+  color: #ffffff !important;
+}
+
+.w-dialog__close:hover,
+.w-side-panel__close:hover {
+  color: #FFBF00 !important;
+}
+
+.w-dialog__content,
+.w-side-panel__content {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   19. LOGIN PAGE
+   ═══════════════════════════════════════════════════════════ */
+body.login {
+  background: linear-gradient(135deg, #022851 0%, #1b4a7a 100%) !important;
+}
+
+body.login .content-wrapper {
+  background: transparent !important;
+}
+
+body.login h1 {
+  color: #ffffff !important;
+}
+
+body.login input {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+body.login button[type="submit"] {
+  background-color: #FFBF00 !important;
+  color: #022851 !important;
+}
+
+body.login button[type="submit"]:hover {
+  background-color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   20. FOCUS STATES
+   ═══════════════════════════════════════════════════════════ */
+*:focus-visible {
+  outline: 2px solid #FFBF00 !important;
+  outline-offset: 2px !important;
+}
+
+::selection {
+  background-color: rgba(255, 191, 0, 0.3);
+  color: #022851;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   21. PROGRESS BARS
+   ═══════════════════════════════════════════════════════════ */
+.progress .bar,
+[role="progressbar"] > * {
+  background-color: #FFBF00 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   22. PAGE EXPLORER ARROWS
+   ═══════════════════════════════════════════════════════════ */
+.c-page-explorer__item__action,
+.listing .navigate-pages,
+.listing [aria-label*="child"] {
+  color: #022851 !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #c8d6e5 !important;
+  border-radius: 4px !important;
+}
+
+.c-page-explorer__item__action:hover,
+.listing .navigate-pages:hover {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   23. ADD PAGE BUTTON (+)
+   ═══════════════════════════════════════════════════════════ */
+button[aria-label*="Add"],
+.add-button,
+.w-action-menu__toggle[aria-label*="Add"] {
+  background-color: #FFBF00 !important;
+  color: #022851 !important;
+  border: none !important;
+  border-radius: 50% !important;
+}
+
+button[aria-label*="Add"]:hover {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   24. COLLAPSE/EXPAND BUTTONS
+   ═══════════════════════════════════════════════════════════ */
+.w-panel__toggle,
+button[data-action*="collapse"],
+[aria-label*="Collapse"],
+[aria-label*="Expand"] {
+  background-color: #f8fafc !important;
+  color: #022851 !important;
+  border: 1px solid #c8d6e5 !important;
+  border-radius: 4px !important;
+}
+
+.w-panel__toggle:hover,
+button[data-action*="collapse"]:hover {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   25. IMAGE/DOCUMENT CHOOSERS
+   ═══════════════════════════════════════════════════════════ */
+.chooser,
+.w-field--image_chooser,
+.w-field--document_chooser {
+  background-color: #f8fafc !important;
+  border: 2px dashed #c8d6e5 !important;
+  border-radius: 8px !important;
+}
+
+.chooser:hover {
+  border-color: #FFBF00 !important;
+}
+
+.chooser__preview img {
+  border-radius: 6px !important;
+  border: 2px solid #1b4a7a !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   26. MODALS
+   ═══════════════════════════════════════════════════════════ */
+.modal-content {
+  background-color: #ffffff !important;
+  border-radius: 12px !important;
+}
+
+.modal-header {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+.modal-body {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+.modal-footer {
+  background-color: #f8fafc !important;
+  border-top: 1px solid #e5e7eb !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   27. PAGINATION
+   ═══════════════════════════════════════════════════════════ */
+.pagination {
+  color: #022851 !important;
+}
+
+.pagination a {
+  color: #1b4a7a !important;
+}
+
+.pagination a:hover {
+  color: #022851 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   28. INLINE PANELS
+   ═══════════════════════════════════════════════════════════ */
+.w-panel--nested,
+.inline-panel {
+  background-color: #f8fafc !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   29. CHECKBOXES AND RADIOS
+   ═══════════════════════════════════════════════════════════ */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #022851 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   30. SCROLLBARS (WebKit)
+   ═══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8d6e5;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1b4a7a;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   31. STREAMFIELD ACTION BUTTONS - Smaller, cleaner
+   ═══════════════════════════════════════════════════════════ */
+.c-sf-block__actions,
+.c-sf-block__header__actions {
+  display: flex !important;
+  gap: 0.25rem !important;
+}
+
+.c-sf-block__actions button,
+.c-sf-block__header__actions button,
+.c-sf-block [data-action] {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  padding: 0.25rem !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #c8d6e5 !important;
+  border-radius: 4px !important;
+  color: #1b4a7a !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.c-sf-block__actions button:hover,
+.c-sf-block__header__actions button:hover {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+  border-color: #022851 !important;
+}
+
+.c-sf-block__actions svg,
+.c-sf-block__header__actions svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   32. LABEL TO FIELD SPACING - Tighter
+   ═══════════════════════════════════════════════════════════ */
+.w-field {
+  margin-bottom: 0.75rem !important;
+}
+
+.w-field__label {
+  margin-bottom: 0.25rem !important;
+  padding-bottom: 0 !important;
+}
+
+.w-field__wrapper {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.w-field__input {
+  margin-top: 0.25rem !important;
+}
+
+.w-field__help {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0 !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.8rem !important;
+}
+
+/* StreamField label spacing */
+.c-sf-block .w-field {
+  margin-bottom: 0.5rem !important;
+}
+
+.c-sf-block .w-field__label {
+  margin-bottom: 0.125rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   33. COMMENTS BOX - Clean styling
+   ═══════════════════════════════════════════════════════════ */
+.w-comments,
+.comments-panel,
+[data-side-panel="comments"] {
+  background-color: #ffffff !important;
+}
+
+.w-comments__header,
+.comments-panel__header {
+  background-color: #f8fafc !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.w-comments__input,
+.comments-panel textarea,
+.w-comment-form textarea {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 1px solid #c8d6e5 !important;
+  border-radius: 6px !important;
+  padding: 0.5rem !important;
+  font-size: 0.875rem !important;
+}
+
+.w-comments__input:focus,
+.comments-panel textarea:focus {
+  border-color: #FFBF00 !important;
+}
+
+.w-comment,
+.comment-item {
+  background-color: #f8fafc !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 6px !important;
+  padding: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Comment author and date */
+.w-comment__author,
+.comment-item__author {
+  color: #022851 !important;
+  font-weight: 600 !important;
+}
+
+.w-comment__date,
+.comment-item__date {
+  color: #6b7280 !important;
+  font-size: 0.75rem !important;
+}
+
+/* Cancel button in comments */
+.w-comments button[type="button"],
+.comments-panel .button-secondary {
+  background-color: #f8fafc !important;
+  color: #1b4a7a !important;
+  border: 1px solid #c8d6e5 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px !important;
+  font-size: 0.875rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   34. STATUS BAR DROPDOWN - Clean action menu
+   ═══════════════════════════════════════════════════════════ */
+.w-action-menu,
+.w-dropdown--actions {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  overflow: hidden !important;
+}
+
+.w-action-menu__item,
+.w-dropdown--actions button,
+.w-dropdown--actions a {
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  padding: 0.75rem 1rem !important;
+  border: none !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.875rem !important;
+  width: 100% !important;
+  text-align: left !important;
+}
+
+.w-action-menu__item:last-child,
+.w-dropdown--actions button:last-child {
+  border-bottom: none !important;
+}
+
+.w-action-menu__item:hover,
+.w-dropdown--actions button:hover,
+.w-dropdown--actions a:hover {
+  background-color: #f8fafc !important;
+  color: #022851 !important;
+}
+
+.w-action-menu__item svg,
+.w-dropdown--actions svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: #1b4a7a !important;
+}
+
+/* Primary action in dropdown (Publish) */
+.w-action-menu__item--primary,
+.w-action-menu__item[data-action="publish"] {
+  background-color: #022851 !important;
+  color: #ffffff !important;
+}
+
+.w-action-menu__item--primary:hover {
+  background-color: #1b4a7a !important;
+}
+
+.w-action-menu__item--primary svg {
+  color: #ffffff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   35. SAVE DRAFT BAR - Bottom action bar
+   ═══════════════════════════════════════════════════════════ */
+.w-action-bar,
+.w-footer-actions,
+footer.w-footer {
+  background-color: #f8fafc !important;
+  border-top: 2px solid #022851 !important;
+  padding: 0.75rem 1rem !important;
+}
+
+.w-action-bar button,
+.w-footer-actions button {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.875rem !important;
+  border-radius: 6px !important;
+}
+
+/* Unsaved comments notice */
+.w-unsaved-comments,
+[data-unsaved-comments] {
+  background-color: #fff3cd !important;
+  color: #856404 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px !important;
+  font-size: 0.875rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   36. PANEL HEADERS - Remove extra gray bars
+   ═══════════════════════════════════════════════════════════ */
+.w-panel__header,
+.w-panel__heading {
+  background-color: transparent !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+.w-panel__heading-text {
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  color: #022851 !important;
+}
+
+/* Collapsed panel header */
+.w-panel--collapsed .w-panel__header {
+  background-color: #f8fafc !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   37. EXTRA GRAY BARS - Clean up
+   ═══════════════════════════════════════════════════════════ */
+.w-panel__divider,
+.w-field__divider,
+hr {
+  border-color: #e5e7eb !important;
+  margin: 0.5rem 0 !important;
+}
+
+/* Remove unnecessary backgrounds */
+.w-panel__content {
+  padding: 0.75rem !important;
+}
+
+.c-sf-block__content {
+  padding: 0.75rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   38. STREAMFIELD BLOCK HEADER - Cleaner
+   ═══════════════════════════════════════════════════════════ */
+.c-sf-block__header {
+  padding: 0.5rem 0.75rem !important;
+  background-color: #f8fafc !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.c-sf-block__header-title {
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: #022851 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   39. ADD BLOCK BUTTONS - Smaller
+   ═══════════════════════════════════════════════════════════ */
+.c-sf-add-button,
+.c-sf-add-panel__grid button {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.8rem !important;
+  border-radius: 4px !important;
+}
+
+.c-sf-add-button svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Plus button for adding blocks */
+button[aria-label*="Insert"],
+.c-sf-container__add-button {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background-color: #022851 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+button[aria-label*="Insert"]:hover,
+.c-sf-container__add-button:hover {
+  background-color: #FFBF00 !important;
+  color: #022851 !important;
+}

@@ -1,0 +1,27 @@
+:root,
+.w-theme-system,
+.w-theme-light,
+.w-theme-dark {
+  --tenant-header-bg: linear-gradient(135deg, #022851 0%, #0e3b67 52%, #1b4a7a 100%);
+  --tenant-header-text: #f4f8ff;
+  --tenant-sidebar-bg: linear-gradient(180deg, #032449 0%, #02203d 100%);
+  --tenant-focus: #ffbf00;
+
+  --w-color-primary-hue: 213;
+  --w-color-primary-saturation: 95%;
+  --w-color-primary-lightness: 16%;
+  --w-color-primary: #022851;
+  --w-color-primary-200: #1b4a7a;
+  --w-color-secondary: #ffbf00;
+  --w-color-surface-header: #022851;
+  --w-color-surface-menus: #032449;
+  --w-color-surface-menu-item-active: #1b4a7a;
+}
+
+.w-theme-dark,
+[data-theme="dark"],
+.theme-dark {
+  --tenant-header-bg: linear-gradient(135deg, #071626 0%, #0d2338 58%, #1a3a58 100%);
+  --tenant-header-text: #e7f0ff;
+  --tenant-sidebar-bg: linear-gradient(180deg, #0b1a2b 0%, #0e1f34 100%);
+}

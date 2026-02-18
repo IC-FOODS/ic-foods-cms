@@ -1,0 +1,23 @@
+{
+  "site_name": "IC-FOODS CMS",
+  "theme": {
+    "css_url": "/wagtail-theme/icfoods-wagtail.css",
+    "logo_url": "/wagtail-theme/logo.svg"
+  },
+  "frontend": {
+    "base_url": "/",
+    "page_routes": {
+      "ic-foods": "/",
+      "about": "/about",
+      "connect": "/connect",
+      "projects": "/projects",
+      "partners": "/partners",
+      "publications": "/publications"
+    }
+  },
+  "branding": {
+    "primary_color": "#022851",
+    "secondary_color": "#FFBF00",
+    "accent_color": "#1b4a7a"
+  }
+}
