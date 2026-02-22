@@ -7,6 +7,21 @@
   --tenant-sidebar-bg: linear-gradient(180deg, #032449 0%, #02203d 100%);
   --tenant-focus: #ffbf00;
 
+  --kb-snippet-header-bg: #e8f1fc;
+  --kb-snippet-filter-row-bg: #f5f9ff;
+  --kb-snippet-filter-input-text: #0f233b;
+  --kb-snippet-filter-input-bg: #ffffff;
+  --kb-snippet-filter-input-border: #c5d4e6;
+  --kb-snippet-filter-placeholder: #445f7e;
+  --kb-snippet-filter-focus-border: #8caed4;
+  --kb-snippet-selected-row-bg: #d8e6f7;
+  --kb-snippet-selected-row-text: #102842;
+  --kb-snippet-checkbox-accent: #0f3b68;
+  --kb-snippet-checkbox-border: #25486f;
+  --kb-snippet-checkbox-bg: #ffffff;
+  --kb-snippet-hover-row-bg: #123f6a;
+  --kb-snippet-hover-row-text: #ffd66f;
+
   --w-color-primary-hue: 213;
   --w-color-primary-saturation: 95%;
   --w-color-primary-lightness: 16%;
