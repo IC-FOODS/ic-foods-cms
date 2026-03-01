@@ -44,3 +44,7 @@ __pycache__/
 ._*
 ~$*
 Thumbs.db
+
+node_modules.nosync
+
+node_modules.nosync
